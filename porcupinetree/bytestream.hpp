@@ -34,6 +34,10 @@ public:
 	virtual int64_t readInt64();
 	virtual uint64_t readUInt64();
 
+	byte curByte();
+	byte _readByte();
+	byte _writeByte(byte b);
+
 	//write functions
 	virtual void writeByte(byte b);
 	virtual void writeNBytesAsVal(unsigned long long v, size_t nBytes);

@@ -67,13 +67,13 @@ unsigned long long ByteStream::readBytesAsVal(size_t nBytes)
     case bmode_BigEndian:
     {
         for (int i = nBytes - 1; i >= 0; i--)
-            res |= (this->readByte() << (i * 8));
+            res |= (this->_readByte() << (i * 8));
         break;
     }
     case bmode_LittleEndian:
     {
         for (int i = 0; i < nBytes; i++)
-            res |= (this->readByte() << (i * 8));
+            res |= (this->_readByte() << (i * 8));
         break;
     }
     }
@@ -117,6 +117,13 @@ void ByteStream::writeByte(byte b)
     this->bytes[this->len - 1] = b;
 }
 
+void ByteStream::_writeByte(byte b)
+{
+    if (++this->len > this->allocSz)
+        this->allocNewChunk();
+    this->bytes[this->len - 1] = b;
+}
+
 void ByteStream::writeNBytesAsVal(unsigned long long v, size_t nBytes)
 {
     if (nBytes <= 0)
@@ -126,13 +133,13 @@ void ByteStream::writeNBytesAsVal(unsigned long long v, size_t nBytes)
     case bmode_BigEndian:
     {
         for (int i = nBytes - 1; i >= 0; i--)
-            this->writeByte((v >> (i * 8)) & 0xff);
+            this->_writeByte((v >> (i * 8)) & 0xff);
         break;
     }
     case bmode_LittleEndian:
     {
         for (int i = 0; i < nBytes; i++)
-            this->writeByte((v >> (i * 8)) & 0xff);
+            this->_writeByte((v >> (i * 8)) & 0xff);
         break;
     }
     }
@@ -219,7 +226,7 @@ char* ByteStream::readCStr(size_t len) {
     ZeroMem(_by, len);
 
     do {
-        *cur++ = (char)this->readByte();
+        *cur++ = (char)this->_readByte();
     } while (cur != e);
 
     return _by;
@@ -244,6 +251,18 @@ std::string ByteStream::readStr(size_t len) {
         res = res.substr(0, len);
 
     return res;
+}
+
+byte ByteStream::curByte() {
+    return this->bytes[this->tell()];
+}
+
+byte ByteStream::_readByte()
+{
+    if (this->readPos >= this->len) //Note to self, this has broken things ;-;
+        return 0;
+
+    return this->bytes[this->readPos++];
 }
 
 //welp

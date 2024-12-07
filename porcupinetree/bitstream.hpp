@@ -13,9 +13,10 @@ public:
 	bit curBit();
 	bit readBit();
 	u32 readNBits(size_t nBits);
+	void skipBits(size_t nBits);
 
 	byte readByte() override;
-	i16 readByteAligned();
+	byte readByteAligned();
 
 	i16 readInt16() override;
 	i16 readInt16Aligned();
