@@ -33,6 +33,12 @@
     <ClInclude Include="msutil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="filewrite.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="binary_dump.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="h264.cpp">
@@ -49,6 +55,12 @@
     </ClCompile>
     <ClCompile Include="bytestream.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filewrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_dump.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

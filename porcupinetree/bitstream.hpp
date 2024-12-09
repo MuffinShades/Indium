@@ -9,6 +9,10 @@ public:
 
 	}
 
+	BitStream() : ByteStream() {
+
+	}
+
 	//read functions
 	bit curBit();
 	bit readBit();
@@ -37,7 +41,7 @@ public:
 
 	//write functions
 	void writeBit(bit b);
-	void writeBitsAsVal(u32 val, size_t nBits);
+	void writeVal(u64 val, size_t nBits);
 
 	void writeByte(byte val) override;
 	void writeByteAligned(byte val);

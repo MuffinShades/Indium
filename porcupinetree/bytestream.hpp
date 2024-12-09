@@ -10,7 +10,7 @@ enum ByteStreamMode {
 };
 
 class ByteStream {
-private:
+protected:
 	byte* bytes = nullptr;
 	size_t len = 0;
 	size_t allocSz = 0;
@@ -36,7 +36,7 @@ public:
 
 	byte curByte();
 	byte _readByte();
-	byte _writeByte(byte b);
+	void _writeByte(byte b);
 
 	//write functions
 	virtual void writeByte(byte b);

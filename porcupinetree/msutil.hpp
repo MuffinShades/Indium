@@ -32,3 +32,7 @@ template<class _Ty> void ZeroMem(_Ty* buf, const size_t sz) {
 	memset(buf, sz * sizeof(_Ty), 0);
 }
 #endif
+
+#ifndef MAKE_MASK
+#define MAKE_MASK(sz) ((1 << (sz)) - 1)
+#endif

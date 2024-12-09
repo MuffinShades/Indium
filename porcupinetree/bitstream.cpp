@@ -27,14 +27,14 @@ bit BitStream::readBit() {
 byte BitStream::readByte() {
     //calc how much is left in current byte
     const size_t bitsLeft = 8 - this->subBit;
-    byte bMask = (1 << bitsLeft) - 1;
+    byte bMask = MAKE_MASK(bitsLeft);
     byte bLeft = this->readByteAligned() & bMask; //get left part
 
     const size_t rBits = 8 - bitsLeft; //number of bits on right
 
     //if we're not reading an aligned byte we need to split
     if (rBits > 0) {
-        byte rMask = ((1 << rBits) - 1) << bitsLeft; //get right bit mask
+        byte rMask = MAKE_MASK(rBits) << bitsLeft; //get right bit mask
         byte bRight = this->curByte() & rMask; //get right bits
         this->subBit += rBits;
         return bLeft | bRight; //combine
@@ -57,13 +57,13 @@ u64 BitStream::readBytesAsVal(size_t nBytes) {
     case bmode_BigEndian:
     {
         for (int i = nBytes - 1; i >= 0; i--)
-            res |= (this->_readByte() << (i * 8));
+            res |= (this->readByte() << (i * 8));
         break;
     }
     case bmode_LittleEndian:
     {
         for (int i = 0; i < nBytes; i++)
-            res |= (this->_readByte() << (i * 8));
+            res |= (this->readByte() << (i * 8));
         break;
     }
     }
@@ -100,7 +100,7 @@ u32 BitStream::readNBits(size_t nBits) {
 
     size_t bitsLeft = nBits;
 
-    const byte msk = (1 << nBits) - 1, d = fBitsLeft - nBits;
+    const byte msk = MAKE_MASK(nBits), d = fBitsLeft - nBits;
     u32 fChunk = (this->curByte() & (msk << d)) >> d; //first chunk of bits
 
     //if we are reading less bits that however many to next byte we just return next couple bits
@@ -122,16 +122,136 @@ u32 BitStream::readNBits(size_t nBits) {
     u32 res = fChunk;
 
     //add remaining full bits
-    while (bitsLeft > 8) {
+    while (bitsLeft >= 8) {
         res <<= 8;
         res |= this->readByteAligned();
         bitsLeft -= 8;
     }
 
     //add last chunk
-    const size_t lb = 8 - bitsLeft;
-    u32 lChunk = (this->curByte() & (((1 << bitsLeft) - 1) << lb)) >> lb;
+    const size_t lb = 7 - bitsLeft;
+    u32 lChunk = (this->bytes[this->readPos] & (MAKE_MASK(bitsLeft) << lb)) >> lb;
     this->subBit = bitsLeft;
 
     return (res << 8) | lChunk;
+}
+
+i16 BitStream::readInt16() {
+    return (i16)this->readBytesAsVal(2);
+}
+
+u16 BitStream::readUInt16() {
+    return (u16)this->readBytesAsVal(2);
+}
+
+i32 BitStream::readInt32() {
+    return (i32)this->readBytesAsVal(4);
+}
+
+u32 BitStream::readUInt32() {
+    return (u32)this->readBytesAsVal(4);
+}
+
+i64 BitStream::readInt64() {
+    return (i64)this->readBytesAsVal(8);
+}
+
+u64 BitStream::readUInt64() {
+    return (u64)this->readBytesAsVal(8);
+}
+
+//write functions
+void BitStream::writeBit(bit b) {
+    byte* y = this->getBytePtr();
+    size_t p = this->readPos;
+
+    if (p == this->len) { //make this execute if we are at the last byte
+        if (++this->subBit >= 8) {
+            this->subBit = 0;
+            this->_writeByte(0);
+            p++;
+        }
+        *(y + p) |= (b << (7 - this->subBit));
+    } else { //else we need to write inbetween bytes which is slow :((
+        //uh i dont really want to do this so...
+    }
+}
+
+void BitStream::writeVal(u64 val, size_t nBits) {
+    size_t p = this->readPos;
+    const u64 msk = MAKE_MASK(nBits);
+
+    //just so preperation
+    while (p >= this->len)
+        if (++this->len >= this->allocSz)
+            this->allocNewChunk();
+
+
+    //
+    if (p == this->len) {
+        std::cout << "gWrite" << std::endl;
+        size_t bitsLeft = 8 - this->subBit;
+        if (nBits < bitsLeft) {
+            this->bytes[p] |= val & msk;
+            this->subBit += nBits;
+        }
+        else {
+            std::cout << "path2" << std::endl;
+            //fill remaining bits of the byte
+            this->bytes[p] |= ((val >> (nBits - bitsLeft)) & MAKE_MASK(bitsLeft));
+            nBits -= bitsLeft;
+
+            std::cout << "bitsLeft: " << nBits << " " << (u32)this->bytes[p] << std::endl;
+            
+            //write remainign full bytes
+            while (nBits >= 8) {
+                this->writeByteAligned((val >> (nBits -= 8)) & 0xff);
+                this->readPos++;
+            }
+            
+            this->subBit = 0;
+
+            //write last bits left
+            if (nBits > 0) {
+                this->readPos++;
+                this->writeByteAligned(((val >> nBits) & MAKE_MASK(nBits)) << (this->subBit = 7 - nBits));
+            }
+        }
+    }
+    else {
+        //uhh
+    }
+}
+
+void BitStream::writeByte(byte b) {
+    this->writeVal(b, 8);
+}
+
+void BitStream::writeByteAligned(byte b) {
+    this->subBit = 0;
+    this->_writeByte(b);
+}
+
+void BitStream::writeInt16(i16 val) {
+    this->writeVal(val, 16);
+}
+
+void BitStream::writeUInt16(u16 val) {
+    this->writeVal(val, 16);
+}
+
+void BitStream::writeInt32(i32 val) {
+    this->writeVal(val, 32);
+}
+
+void BitStream::writeUInt32(u32 val) {
+    this->writeVal(val, 32);
+}
+
+void BitStream::writeInt64(i64 val) {
+    this->writeVal(val, 64);
+}
+
+void BitStream::writeUInt64(u64 val) {
+    this->writeVal(val, 64);
 }

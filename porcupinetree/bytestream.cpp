@@ -110,15 +110,13 @@ uint64_t ByteStream::readUInt64()
     return (uint64_t)this->readInt64();
 }
 
-void ByteStream::writeByte(byte b)
-{
+void ByteStream::writeByte(byte b) {
     if (++this->len > this->allocSz)
         this->allocNewChunk();
     this->bytes[this->len - 1] = b;
 }
 
-void ByteStream::_writeByte(byte b)
-{
+void ByteStream::_writeByte(byte b) {
     if (++this->len > this->allocSz)
         this->allocNewChunk();
     this->bytes[this->len - 1] = b;
