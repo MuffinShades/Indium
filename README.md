@@ -1,4 +1,4 @@
-# porcupinetree
+# Media Muffin
 
 encoder and decoder for the following file types:
 
@@ -9,6 +9,9 @@ encoder and decoder for the following file types:
 .bmp,
 .png,
 .jpg,
+.ogg,
+.bmp,
+.avi,
 and .wav
 
 Also has encoding and decoding for the following codecs:
