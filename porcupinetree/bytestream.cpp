@@ -114,12 +114,14 @@ void ByteStream::writeByte(byte b) {
     if (++this->len > this->allocSz)
         this->allocNewChunk();
     this->bytes[this->len - 1] = b;
+    this->byteWriteAdv();
 }
 
 void ByteStream::_writeByte(byte b) {
     if (++this->len > this->allocSz)
         this->allocNewChunk();
     this->bytes[this->len - 1] = b;
+    this->byteWriteAdv();
 }
 
 void ByteStream::writeNBytesAsVal(unsigned long long v, size_t nBytes)
@@ -196,6 +198,11 @@ void ByteStream::writeBytes(byte* dat, size_t sz)
     // memcpy
     memcpy(this->bytes + pos, dat, sz);
     this->len = pos + sz;
+
+    if (this->writePos == this->readPos)
+        this->readPos = this->len - 1;
+
+    this->writePos = this->len - 1;
 }
 
 ByteStream::~ByteStream()
@@ -261,6 +268,20 @@ byte ByteStream::_readByte()
         return 0;
 
     return this->bytes[this->readPos++];
+}
+
+//advances another byte when writing stuff
+void ByteStream::byteWriteAdv() {
+    if (this->readPos == this->writePos++)
+        this->readPos = this->writePos;
+
+    if (this->writePos >= this->len)
+        if (++this->len >= this->allocSz)
+            this->allocNewChunk();
+}
+
+void ByteStream::catchUp() {
+    this->readPos = this->writePos;
 }
 
 //welp

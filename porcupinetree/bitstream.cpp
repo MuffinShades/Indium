@@ -162,64 +162,47 @@ u64 BitStream::readUInt64() {
 
 //write functions
 void BitStream::writeBit(bit b) {
-    byte* y = this->getBytePtr();
-    size_t p = this->readPos;
-
-    if (p == this->len) { //make this execute if we are at the last byte
-        if (++this->subBit >= 8) {
-            this->subBit = 0;
-            this->_writeByte(0);
-            p++;
-        }
-        *(y + p) |= (b << (7 - this->subBit));
-    } else { //else we need to write inbetween bytes which is slow :((
-        //uh i dont really want to do this so...
+    if (++this->subBit >= 8) {
+        this->subBit = 0;
+        this->_writeByte(0);
     }
+    *(this->bytes + this->writePos) |= (b << (7 - this->subBit));
 }
 
 void BitStream::writeVal(u64 val, size_t nBits) {
-    size_t p = this->readPos;
+    size_t p = this->writePos;
     const u64 msk = MAKE_MASK(nBits);
 
-    //just so preperation
+    //just some preperation
     while (p >= this->len)
         if (++this->len >= this->allocSz)
             this->allocNewChunk();
 
 
     //
-    if (p == this->len) {
-        std::cout << "gWrite" << std::endl;
-        size_t bitsLeft = 8 - this->subBit;
-        if (nBits < bitsLeft) {
-            this->bytes[p] |= val & msk;
-            this->subBit += nBits;
-        }
-        else {
-            std::cout << "path2" << std::endl;
-            //fill remaining bits of the byte
-            this->bytes[p] |= ((val >> (nBits - bitsLeft)) & MAKE_MASK(bitsLeft));
-            nBits -= bitsLeft;
-
-            std::cout << "bitsLeft: " << nBits << " " << (u32)this->bytes[p] << std::endl;
-            
-            //write remainign full bytes
-            while (nBits >= 8) {
-                this->writeByteAligned((val >> (nBits -= 8)) & 0xff);
-                this->readPos++;
-            }
-            
-            this->subBit = 0;
-
-            //write last bits left
-            if (nBits > 0) {
-                this->readPos++;
-                this->writeByteAligned(((val >> nBits) & MAKE_MASK(nBits)) << (this->subBit = 7 - nBits));
-            }
-        }
+    size_t bitsLeft = 8 - this->subBit;
+    if (nBits <= bitsLeft) {
+        this->bytes[p] |= val & msk;
+        this->subBit += nBits;
     }
     else {
-        //uhh
+        //fill remaining bits of the byte
+        this->bytes[p] |= ((val >> (nBits - bitsLeft)) & MAKE_MASK(bitsLeft));
+        nBits -= bitsLeft;
+
+        //write remainign full bytes
+        while (nBits >= 8) {
+            this->writeByteAligned((val >> (nBits -= 8)) & 0xff);
+            this->byteWriteAdv();
+        }
+
+        this->subBit = 0;
+
+        //write last bits left
+        if (nBits > 0) {
+            this->byteWriteAdv();
+            this->writeByteAligned(((val >> nBits) & MAKE_MASK(nBits)) << (this->subBit = 7 - nBits));
+        }
     }
 }
 

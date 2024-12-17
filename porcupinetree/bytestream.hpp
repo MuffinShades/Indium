@@ -14,7 +14,7 @@ protected:
 	byte* bytes = nullptr;
 	size_t len = 0;
 	size_t allocSz = 0;
-	size_t readPos = 0;
+	size_t readPos = 0, writePos = 0;
 	size_t chunkSz = 0xfff;
 public:
 	int mode = bmode_BigEndian;
@@ -48,6 +48,10 @@ public:
 	virtual void writeInt64(int64_t v);
 	virtual void writeUInt64(uint64_t v);
 	virtual void writeBytes(byte* dat, size_t sz);
+	
+	//
+	void catchUp();
+	void byteWriteAdv();
 
 
 	void clip();
