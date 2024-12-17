@@ -9,15 +9,15 @@ void ByteStream::allocNewChunk()
     this->allocBytes(this->chunkSz);
 }
 
-void ByteStream::allocBytes(size_t sz)
+void ByteStream::allocBytes(size_t sz) 
 {
-    if (this->bytes == nullptr || this->len <= 0) {
-        this->allocSz = 1;
-        if (this->bytes != nullptr)
+    if (!this->bytes || this->allocSz <= 0) {
+        this->allocSz = sz;
+        if (this->bytes)
             delete[] this->bytes;
 
-        this->bytes = new byte[1];
-        ZeroMem(this->bytes, 1);
+        this->bytes = new byte[this->allocSz];
+        ZeroMem(this->bytes, this->allocSz);
     }
     if (sz <= 0)
         return;

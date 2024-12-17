@@ -161,12 +161,12 @@ u64 BitStream::readUInt64() {
 }
 
 //write functions
-void BitStream::writeBit(bit b) {
+void BitStream::writeBit(bit b) {    
     if (++this->subBit >= 8) {
         this->subBit = 0;
         this->_writeByte(0);
     }
-    *(this->bytes + this->writePos) |= (b << (7 - this->subBit));
+    *(this->bytes + this->writePos) |= (((byte)b & 0x1) << (8 - this->subBit));
 }
 
 void BitStream::writeVal(u64 val, size_t nBits) {
@@ -180,29 +180,30 @@ void BitStream::writeVal(u64 val, size_t nBits) {
 
 
     //
-    size_t bitsLeft = 8 - this->subBit;
+    size_t bitsLeft = 8 - (this->subBit);
     if (nBits <= bitsLeft) {
-        this->bytes[p] |= val & msk;
-        this->subBit += nBits;
-    }
-    else {
-        //fill remaining bits of the byte
-        this->bytes[p] |= ((val >> (nBits - bitsLeft)) & MAKE_MASK(bitsLeft));
-        nBits -= bitsLeft;
+        this->bytes[p] |= (val & msk) << (8 - (this->subBit += nBits));
 
-        //write remainign full bytes
-        while (nBits >= 8) {
-            this->writeByteAligned((val >> (nBits -= 8)) & 0xff);
+        if (this->subBit >= 8) {
+            this->subBit = 0;
             this->byteWriteAdv();
         }
+    } 
+    else {
+        //fill remaining bits of the byte
+        this->bytes[p] |= ((val >> (nBits -= bitsLeft)) & MAKE_MASK(bitsLeft));
+
+        //write remainign full bytes
+        while (nBits >= 8)
+            this->writeByteAligned((val >> (nBits -= 8)) & 0xff);
 
         this->subBit = 0;
 
         //write last bits left
-        if (nBits > 0) {
-            this->byteWriteAdv();
-            this->writeByteAligned(((val >> nBits) & MAKE_MASK(nBits)) << (this->subBit = 7 - nBits));
-        }
+        if (nBits > 0)
+            this->writeByteAligned(
+                ((val & MAKE_MASK(nBits)) >> nBits) << (8 - (this->subBit = nBits))
+            );
     }
 }
 

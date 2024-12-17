@@ -29,7 +29,7 @@
 #ifndef ZeroMem
 template<class _Ty> void ZeroMem(_Ty* buf, const size_t sz) {
 	if (!buf) return;
-	memset(buf, sz * sizeof(_Ty), 0);
+	memset(buf, 0, sz * sizeof(_Ty));
 }
 #endif
 

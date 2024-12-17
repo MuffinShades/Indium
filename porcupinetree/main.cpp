@@ -10,6 +10,11 @@ i32 main(void) {
 
 	testStream.writeByte(0x5d);
 	testStream.writeBit(1);
+	testStream.writeBit(0);
+	testStream.writeBit(1);
+	testStream.writeByte(0xff);
+	testStream.writeByte(0xff); //uh overflows somehow ;-;
+	testStream.writeByte(0xff);
 
 	std::cout << "Stream Info: " << testStream.getBytePtr() << " " << testStream.getSize() << std::endl;
 
