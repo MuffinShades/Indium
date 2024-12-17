@@ -39,6 +39,15 @@
     <ClInclude Include="binary_dump.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="balloon.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mov.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mp4.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="h264.cpp">
@@ -59,8 +68,17 @@
     <ClCompile Include="filewrite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="balloon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mp4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mov.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="binary_dump.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

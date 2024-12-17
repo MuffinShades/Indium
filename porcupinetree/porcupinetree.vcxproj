@@ -131,23 +131,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="balloon.hpp" />
     <ClInclude Include="binary_dump.hpp" />
     <ClInclude Include="bitstream.hpp" />
     <ClInclude Include="bytestream.hpp" />
     <ClInclude Include="filewrite.hpp" />
     <ClInclude Include="h264.hpp" />
+    <ClInclude Include="mov.hpp" />
     <ClInclude Include="mp3.hpp" />
+    <ClInclude Include="mp4.hpp" />
     <ClInclude Include="msutil.hpp" />
     <ClInclude Include="types.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="balloon.cpp" />
     <ClCompile Include="binary_dump.cpp" />
     <ClCompile Include="bitstream.cpp" />
     <ClCompile Include="bytestream.cpp" />
     <ClCompile Include="filewrite.cpp" />
     <ClCompile Include="h264.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mov.cpp" />
     <ClCompile Include="mp3.cpp" />
+    <ClCompile Include="mp4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
