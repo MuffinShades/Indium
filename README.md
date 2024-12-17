@@ -1,4 +1,4 @@
-# porcupinetree
+# Media Muffin
 
 encoder and decoder for the following file types:
 
