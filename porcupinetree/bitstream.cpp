@@ -239,3 +239,36 @@ void BitStream::writeInt64(i64 val) {
 void BitStream::writeUInt64(u64 val) {
     this->writeVal(val, 64);
 }
+
+byte* BitStream::readBytes(size_t nBytes) {
+
+    //if aligned then we can read as normal
+    if (this->subBit == 0) {
+        if (nBytes <= 0) return nullptr;
+
+        const size_t byteRead = min(nBytes, this->len - this->readPos);
+
+        byte* res = new byte[nBytes];
+        ZeroMem(res, nBytes);
+
+        memcpy(res, this->bytes, byteRead);
+
+        std::cout << "reading: " << byteRead << " bytes | " << this->len << std::endl;
+
+        this->readPos += byteRead;
+
+        return res;
+    }
+    else {
+        if (nBytes <= 0) return nullptr;
+        const size_t byteRead = min(nBytes, this->len - this->readPos);
+        
+        byte* res = new byte[nBytes];
+        ZeroMem(res, nBytes);
+
+        for (size_t i = 0; i < byteRead; i++)
+            res[i] = this->_readByte();
+
+        return res;
+    }
+}

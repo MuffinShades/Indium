@@ -36,3 +36,13 @@ template<class _Ty> void ZeroMem(_Ty* buf, const size_t sz) {
 #ifndef MAKE_MASK
 #define MAKE_MASK(sz) ((1 << (sz)) - 1)
 #endif
+
+template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
+	if (!buf1 || !buf2) return false;
+
+	for (size_t i = 0; i < bSz; i++)
+		if (*buf1++ != *buf2++)
+			return false;
+
+	return true;
+}

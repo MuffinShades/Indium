@@ -38,6 +38,7 @@ public:
 	u64 readUInt64Aligned();
 
 	u64 readBytesAsVal(size_t nBytes);
+	byte* readBytes(size_t nBytes) override;
 
 	//write functions
 	void writeBit(bit b);

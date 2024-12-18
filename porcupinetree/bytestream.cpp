@@ -80,6 +80,19 @@ unsigned long long ByteStream::readBytesAsVal(size_t nBytes)
     return res;
 }
 
+byte* ByteStream::readBytes(size_t nBytes) {
+    if (nBytes <= 0) return nullptr;
+
+    byte* res = new byte[nBytes];
+    ZeroMem(res, nBytes);
+
+    const size_t byteRead = min(nBytes, this->len - this->readPos);
+    memcpy(res, this->bytes, byteRead);
+    this->readPos += byteRead;
+
+    return res;
+}
+
 short ByteStream::readInt16()
 {
     return (short)this->readBytesAsVal(__glb_sz_short);

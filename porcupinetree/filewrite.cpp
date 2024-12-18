@@ -27,9 +27,10 @@ file FileWrite::readFromBin(std::string src) {
 
 
 	//get file length
-	is.seekg(std::ios::end);
+	is.seekg(0, std::ios::end);
 	size_t f_len = is.tellg();
-	is.seekg(std::ios::beg);
+	std::cout << "File Length: " << is.tellg() << std::endl;
+	is.seekg(0, std::ios::beg);
 
 	//read into buffer
 	byte* buf = new byte[f_len];

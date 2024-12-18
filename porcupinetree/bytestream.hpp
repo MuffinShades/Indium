@@ -33,6 +33,7 @@ public:
 	virtual unsigned int readUInt32();
 	virtual int64_t readInt64();
 	virtual uint64_t readUInt64();
+	virtual byte* readBytes(size_t nBytes);
 
 	byte curByte();
 	byte _readByte();

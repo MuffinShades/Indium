@@ -135,6 +135,7 @@
     <ClInclude Include="binary_dump.hpp" />
     <ClInclude Include="bitstream.hpp" />
     <ClInclude Include="bytestream.hpp" />
+    <ClInclude Include="FileStream.hpp" />
     <ClInclude Include="filewrite.hpp" />
     <ClInclude Include="h264.hpp" />
     <ClInclude Include="mov.hpp" />
@@ -148,12 +149,16 @@
     <ClCompile Include="binary_dump.cpp" />
     <ClCompile Include="bitstream.cpp" />
     <ClCompile Include="bytestream.cpp" />
+    <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="filewrite.cpp" />
     <ClCompile Include="h264.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mov.cpp" />
     <ClCompile Include="mp3.cpp" />
     <ClCompile Include="mp4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ID3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
