@@ -31,11 +31,11 @@ mp3_frame_header read_frame_header(BitStream* stream) {
 	}
 
 	mp3_frame_header res = {
-		.frame_sync = stream->readNBits(12)
+		.frame_sync = (u16) stream->readNBits(12)
 	};
 
 	if (res.frame_sync != 0b111111111111) {
-		std::cout << "Warning invalid frame sync!" << std::endl;
+		std::cout << "Warning invalid frame sync! " << res.frame_sync << std::endl;
 	}
 
 	//read in mpeg version
@@ -55,6 +55,12 @@ mp3_frame_header read_frame_header(BitStream* stream) {
 	//get bit rate
 	//TODO: error check to make suer ranges are valid
 	const size_t br_idx = stream->readNBits(4);
+
+	if (br_idx == 0 || br_idx == 0xf) {
+		std::cout << "Invalid mp3 bit rate!" << std::endl;
+		return { 0 };
+	}
+
 	res.bitRate = bitrate_convert[res.mp_version - 1][layer_to_idx[res.mp_layer]][br_idx];
 
 	//get freq
@@ -68,6 +74,31 @@ mp3_frame_header read_frame_header(BitStream* stream) {
 
 	//TODO: add rest of header reading code
 	//mp3 decoder paper thingy page 21-22
+	res.audit_mode = (mp3_audio_mode) stream->readNBits(2);
+	
+	if (res.audit_mode == mp3_audio_joint_stereo) {
+		stream->readNBits(2);
+	}
+	else
+		stream->readNBits(2);
+
+	//
+	res.copyright = stream->readBit();
+	res.copy = stream->readBit();
+
+	res.emphasis = stream->readNBits(2);
+
+	return res;
+}
+
+void print_frame_header(mp3_frame_header h) {
+	std::cout << "---Frame Header---" << std::endl;
+	std::cout << "Bit Rate: " << h.bitRate << "kpbs" << std::endl;
+	std::cout << "Audio Mode: " << h.audit_mode << std::endl;
+	std::cout << "Frequenct: " << h.freq << "mHz" << std::endl;
+	std::cout << "MPEG Version: " << h.mp_version << std::endl;
+	std::cout << "MPEG Layer: " << h.mp_layer << std::endl;
+	std::cout << "-----------------" << std::endl;
 }
 
 mp3_audio mp3::fileDecode(std::string src) {
@@ -95,6 +126,9 @@ mp3_audio mp3::fileDecode(std::string src) {
 	std::cout << "------------" << std::endl;
 
 	//now start frame extraction
+	mp3_frame_header frame1 = read_frame_header(&stream);
+
+	print_frame_header(frame1);
 
 	return {};
 }

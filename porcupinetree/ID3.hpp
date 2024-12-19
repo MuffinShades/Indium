@@ -27,6 +27,8 @@ static ID3_tag extract_id3_data(BitStream* stream) {
 
 	//make sure alignment is good
 	stream->alignToPrevByte();
+	ByteStreamMode ogMode = (ByteStreamMode) stream->mode;
+	stream->mode = bmode_BigEndian;
 
 	const size_t re = stream->tell();
 
@@ -51,6 +53,9 @@ static ID3_tag extract_id3_data(BitStream* stream) {
 	const size_t tag_sz = stream->readUInt32();
 
 	stream->skipBytes(tag_sz);
+	stream->mode = ogMode;
+
+	std::cout << "EByte: " << (int) stream->curByte() << std::endl;
 
 	return {
 		.tag_len = tag_sz,

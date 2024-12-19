@@ -96,12 +96,21 @@ u32 BitStream::readNBits(size_t nBits) {
     if (nBits <= 0) return 0;
 
     //first step is try to align to next byte
-    const size_t fBitsLeft = 1 - this->subBit;
+    const size_t fBitsLeft = 8 - this->subBit;
 
     size_t bitsLeft = nBits;
 
-    const byte msk = MAKE_MASK(nBits), d = fBitsLeft - nBits;
+    //TODO: fix this function
+    if (bitsLeft < fBitsLeft) {
+        const byte msk = MAKE_MASK(nBits), d = this->subBit;
+        const u32 r = (this->curByte() & (msk << d)) >> d;
+        this->readPos++;
+        return r;
+    }
+
+    const byte msk = MAKE_MASK(fBitsLeft), d = this->subBit;
     u32 fChunk = (this->curByte() & (msk << d)) >> d; //first chunk of bits
+    this->readPos++;
 
     //if we are reading less bits that however many to next byte we just return next couple bits
     if (fBitsLeft >= nBits) {
@@ -128,12 +137,18 @@ u32 BitStream::readNBits(size_t nBits) {
         bitsLeft -= 8;
     }
 
-    //add last chunk
-    const size_t lb = 7 - bitsLeft;
-    u32 lChunk = (this->bytes[this->readPos] & (MAKE_MASK(bitsLeft) << lb)) >> lb;
-    this->subBit = bitsLeft;
+    this->subBit = 0;
 
-    return (res << 8) | lChunk;
+    //add last chunk
+    if (bitsLeft > 0) {
+        const size_t lb = 8 - bitsLeft;
+        u32 lChunk = (this->bytes[this->readPos] & (MAKE_MASK(bitsLeft) << lb)) >> lb;
+        this->subBit = bitsLeft;
+
+        return (res << 8) | lChunk;
+    }
+    else
+        return res;
 }
 
 i16 BitStream::readInt16() {
