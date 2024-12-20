@@ -102,15 +102,15 @@ u32 BitStream::readNBits(size_t nBits) {
 
     //TODO: fix this function
     if (bitsLeft < fBitsLeft) {
-        const byte msk = MAKE_MASK(nBits), d = this->subBit;
-        const u32 r = (this->curByte() & (msk << d)) >> d;
+        const byte msk = MAKE_MASK(nBits), d = fBitsLeft - bitsLeft;
+        const u32 r = (this->curByte() >> d) & msk;
         this->readPos++;
+        this->subBit += bitsLeft;
         return r;
     }
 
-    const byte msk = MAKE_MASK(fBitsLeft), d = this->subBit;
-    u32 fChunk = (this->curByte() & (msk << d)) >> d; //first chunk of bits
-    this->readPos++;
+    const byte msk = MAKE_MASK(fBitsLeft);
+    u32 fChunk = this->curByte() & msk; //first chunk of bits
 
     //if we are reading less bits that however many to next byte we just return next couple bits
     if (fBitsLeft >= nBits) {
@@ -142,10 +142,11 @@ u32 BitStream::readNBits(size_t nBits) {
     //add last chunk
     if (bitsLeft > 0) {
         const size_t lb = 8 - bitsLeft;
-        u32 lChunk = (this->bytes[this->readPos] & (MAKE_MASK(bitsLeft) << lb)) >> lb;
+        u32 lChunk = (this->curByte() >> lb) & MAKE_MASK(bitsLeft);
+
         this->subBit = bitsLeft;
 
-        return (res << 8) | lChunk;
+        return (res << bitsLeft) | lChunk;
     }
     else
         return res;

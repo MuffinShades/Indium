@@ -95,9 +95,14 @@ void print_frame_header(mp3_frame_header h) {
 	std::cout << "---Frame Header---" << std::endl;
 	std::cout << "Bit Rate: " << h.bitRate << "kpbs" << std::endl;
 	std::cout << "Audio Mode: " << h.audit_mode << std::endl;
-	std::cout << "Frequenct: " << h.freq << "mHz" << std::endl;
-	std::cout << "MPEG Version: " << h.mp_version << std::endl;
+	std::cout << "Frequency: " << h.freq << "kHz" << std::endl;
+	std::cout << "MPEG Version: " << (int)h.mp_version << std::endl;
 	std::cout << "MPEG Layer: " << h.mp_layer << std::endl;
+	std::cout << "Emphasis: " << (int)h.emphasis << std::endl;
+	std::cout << "Copy: " << h.copy << std::endl;
+	std::cout << "Copyright: " << h.copyright << std::endl;
+	std::cout << "CRC: " << h.crc_protect << std::endl;
+	std::cout << "Sync: " << h.frame_sync << std::endl;
 	std::cout << "-----------------" << std::endl;
 }
 
