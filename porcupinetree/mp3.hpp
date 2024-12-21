@@ -28,6 +28,12 @@ struct mp3_frame_header {
 	bool copy;
 	bool copyright;
 	byte emphasis;
+	size_t frameLength;
+};
+
+struct mp3_side_info {
+	size_t main_data_beg;
+	u32 private_bits;
 };
 
 struct mp3_frame {

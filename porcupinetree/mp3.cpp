@@ -22,6 +22,8 @@ const u32 sample_freq_table[3][3] = {
 	{11025, 12000, 8000}   //mpeg 2.5
 };
 
+const size_t samplesPerFrame[3] = {384, 1152, 1152};
+
 const size_t layer_to_idx[3] = {2,1,0};
 
 mp3_frame_header read_frame_header(BitStream* stream) {
@@ -88,6 +90,14 @@ mp3_frame_header read_frame_header(BitStream* stream) {
 
 	res.emphasis = stream->readNBits(2);
 
+	//compute frame length
+	if (res.mp_layer == mp3_layer1) {
+		std::cout << "idk how to frame size calculations for mp3 layer 1 ;-;" << std::endl;
+		res.frameLength = 0;
+	}
+	else
+		res.frameLength = 144 * (int)((float)res.bitRate / (float)res.freq) + padding;
+
 	return res;
 }
 
@@ -104,6 +114,47 @@ void print_frame_header(mp3_frame_header h) {
 	std::cout << "CRC: " << h.crc_protect << std::endl;
 	std::cout << "Sync: " << h.frame_sync << std::endl;
 	std::cout << "-----------------" << std::endl;
+}
+
+mp3_side_info decodeSideInfo_dual(BitStream* stream, mp3_frame_header* h) {
+	if (!stream || !h) {
+		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
+		return {};
+	}
+
+	mp3_side_info inf;
+
+	inf.main_data_beg = stream->readNBits(9);
+	inf.private_bits = stream->readNBits(3);
+
+	const u32 share_left = stream->readNBits(4);
+	const u32 share_right = stream->readNBits(4);
+
+	return inf;
+}
+
+mp3_side_info decodeSideInfo_single(BitStream* stream, mp3_frame_header* h) {
+	if (!stream || !h) {
+		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
+		return {};
+	}
+
+
+
+	return {};
+}
+
+mp3_side_info decodeSideInfo(BitStream* stream, mp3_frame_header* h) {
+	if (!stream || !h) {
+		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
+		return {};
+	}
+
+
+	if (h->audit_mode == mp3_audio_dual_channel || h->audit_mode == mp3_audio_joint_stereo || h->audit_mode == mp3_audio_stereo)
+		return decodeSideInfo_dual(stream, h);
+	else
+		return decodeSideInfo_single(stream, h);
 }
 
 mp3_audio mp3::fileDecode(std::string src) {
