@@ -116,24 +116,45 @@ void print_frame_header(mp3_frame_header h) {
 	std::cout << "-----------------" << std::endl;
 }
 
+mp3_si_gran decode_gran(BitStream* stream, mp3_frame_header* h, mp3_side_info* inf, bool mono) {
+	if (!stream || !h) {
+		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
+		return {};
+	}
+
+	mp3_si_gran gr;
+
+	gr.part2_3_len = stream->readNBits(12);
+	gr.big_vals = stream->readNBits(9);
+
+	if (gr.big_vals > 288) {
+		std::cout << "Invalid big value!" << std::endl;
+		return {};
+	}
+
+	gr.global_gain = stream->readNBits(8);
+	gr.scale_fac_compress = stream->readNBits(mono ? 4 : 8);
+}
+
 mp3_side_info decodeSideInfo_dual(BitStream* stream, mp3_frame_header* h) {
 	if (!stream || !h) {
 		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
 		return {};
 	}
 
+	const size_t sInfSz = 32;
+
 	mp3_side_info inf;
 
 	inf.main_data_beg = stream->readNBits(9);
 	inf.private_bits = stream->readNBits(3);
 
-	const u32 share_left = stream->readNBits(4);
-	const u32 share_right = stream->readNBits(4);
+	inf.scfsi = stream->readNBits(8);
 
 	return inf;
 }
 
-mp3_side_info decodeSideInfo_single(BitStream* stream, mp3_frame_header* h) {
+mp3_side_info decodeSideInfo_mono(BitStream* stream, mp3_frame_header* h) {
 	if (!stream || !h) {
 		std::cout << "Invalid stream or header when decoding mp3 side info!" << std::endl;
 		return {};
@@ -154,7 +175,7 @@ mp3_side_info decodeSideInfo(BitStream* stream, mp3_frame_header* h) {
 	if (h->audit_mode == mp3_audio_dual_channel || h->audit_mode == mp3_audio_joint_stereo || h->audit_mode == mp3_audio_stereo)
 		return decodeSideInfo_dual(stream, h);
 	else
-		return decodeSideInfo_single(stream, h);
+		return decodeSideInfo_mono(stream, h);
 }
 
 mp3_audio mp3::fileDecode(std::string src) {

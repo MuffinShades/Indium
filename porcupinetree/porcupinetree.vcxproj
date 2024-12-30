@@ -142,6 +142,7 @@
     <ClInclude Include="mp3.hpp" />
     <ClInclude Include="mp4.hpp" />
     <ClInclude Include="msutil.hpp" />
+    <ClInclude Include="nal.hpp" />
     <ClInclude Include="types.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="mov.cpp" />
     <ClCompile Include="mp3.cpp" />
     <ClCompile Include="mp4.cpp" />
+    <ClCompile Include="nal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ID3.hpp" />

@@ -51,6 +51,9 @@
     <ClInclude Include="FileStream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="nal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="h264.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="FileStream.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nal.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

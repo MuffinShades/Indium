@@ -31,9 +31,22 @@ struct mp3_frame_header {
 	size_t frameLength;
 };
 
+struct mp3_si_gran {
+	size_t part2_3_len;
+	u32 big_vals;
+	u32 global_gain;
+	u32 scale_fac_compress;
+	bool win_switch;
+};
+
+struct mp3_si_gran_dual {
+	mp3_si_gran l, r;
+};
+
 struct mp3_side_info {
 	size_t main_data_beg;
 	u32 private_bits;
+	u32 scfsi;
 };
 
 struct mp3_frame {
