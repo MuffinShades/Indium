@@ -13,89 +13,221 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\zlib">
+      <UniqueIdentifier>{bdd95e98-a4d9-47e4-8ff1-28a4f62ee491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mpeg">
+      <UniqueIdentifier>{5cd33b2c-004a-4496-9e8a-2214b9fac166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\zlib">
+      <UniqueIdentifier>{6f9004a2-1fb9-4db4-a754-a044e8ac76f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mpeg">
+      <UniqueIdentifier>{2a91300c-22c5-4e42-a44e-280edbebdda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stream">
+      <UniqueIdentifier>{e4e04674-9426-43e5-81c0-95e17ebd395a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stream">
+      <UniqueIdentifier>{ce39616c-7f21-44ca-a445-67e4881238b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\asset">
+      <UniqueIdentifier>{a83f369c-06b0-46b3-b64a-c516a50ceb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\asset">
+      <UniqueIdentifier>{254e90d0-1ceb-41b1-b5ba-b39a15050eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\simple_formats">
+      <UniqueIdentifier>{3f2fef10-db56-4472-ba58-2938ab289917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\simple_formats">
+      <UniqueIdentifier>{76b28609-d534-44b8-a27d-3d5c4083324b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ttf">
+      <UniqueIdentifier>{be5709f5-7bf7-441f-adcc-dda448be731a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bitmap">
+      <UniqueIdentifier>{cb803603-4b47-4833-b125-7df6c0f9c1cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bitmap">
+      <UniqueIdentifier>{cfa81a15-17b6-4ae4-9435-937db43acf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fileutil">
+      <UniqueIdentifier>{99a6440d-9c81-4ed1-8766-dd45e64fc827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fileutil">
+      <UniqueIdentifier>{01db0c03-9d6d-49e4-a42c-484b6fa0cd78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ttf">
+      <UniqueIdentifier>{f8e77319-3694-4d75-b3f1-3ece87d896a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\img">
+      <UniqueIdentifier>{b5938cfe-24b6-41bb-ab30-dad179c04c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\img">
+      <UniqueIdentifier>{5663d5cd-b749-406c-850f-b764c14e3050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="h264.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="types.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bitstream.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mp3.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bytestream.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="msutil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="filewrite.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="binary_dump.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="balloon.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="mov.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="h264.hpp">
+      <Filter>Header Files\mpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="mp3.hpp">
+      <Filter>Header Files\mpeg</Filter>
     </ClInclude>
     <ClInclude Include="mp4.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mpeg</Filter>
     </ClInclude>
-    <ClInclude Include="FileStream.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="mov.hpp">
+      <Filter>Header Files\mpeg</Filter>
     </ClInclude>
     <ClInclude Include="nal.hpp">
+      <Filter>Header Files\mpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="linked_map.hpp">
+      <Filter>Header Files\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="micro_vector.h">
+      <Filter>Header Files\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="realigned_buffer.hpp">
+      <Filter>Header Files\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="bitstream.hpp">
+      <Filter>Header Files\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="bytestream.hpp">
+      <Filter>Header Files\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="FileStream.hpp">
+      <Filter>Header Files\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="asset.hpp">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="jparse.hpp">
+      <Filter>Header Files\simple_formats</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmap.hpp">
+      <Filter>Header Files\bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmapRender.hpp">
+      <Filter>Header Files\bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="binary_dump.hpp">
+      <Filter>Header Files\fileutil</Filter>
+    </ClInclude>
+    <ClInclude Include="filewrite.hpp">
+      <Filter>Header Files\fileutil</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.hpp">
+      <Filter>Header Files\fileutil</Filter>
+    </ClInclude>
+    <ClInclude Include="FilePath.hpp">
+      <Filter>Header Files\fileutil</Filter>
+    </ClInclude>
+    <ClInclude Include="error.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="png.hpp">
+      <Filter>Header Files\img</Filter>
+    </ClInclude>
+    <ClInclude Include="jpg.hpp">
+      <Filter>Header Files\img</Filter>
+    </ClInclude>
+    <ClInclude Include="ttf.hpp">
+      <Filter>Header Files\ttf</Filter>
+    </ClInclude>
+    <ClInclude Include="ttfRender.hpp">
+      <Filter>Header Files\ttf</Filter>
+    </ClInclude>
+    <ClInclude Include="xml.hpp">
+      <Filter>Header Files\simple_formats</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="h264.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bitstream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mp3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bytestream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="filewrite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="balloon.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="mp4.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="h264.cpp">
+      <Filter>Source Files\mpeg</Filter>
     </ClCompile>
     <ClCompile Include="mov.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\mpeg</Filter>
     </ClCompile>
-    <ClCompile Include="binary_dump.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="mp4.cpp">
+      <Filter>Source Files\mpeg</Filter>
     </ClCompile>
-    <ClCompile Include="FileStream.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="mp3.cpp">
+      <Filter>Source Files\mpeg</Filter>
     </ClCompile>
     <ClCompile Include="nal.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\mpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="bitstream.cpp">
+      <Filter>Source Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="bytestream.cpp">
+      <Filter>Source Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="FileStream.cpp">
+      <Filter>Source Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="asset.cpp">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="jparse.cpp">
+      <Filter>Source Files\simple_formats</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmap.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmapRender.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="FilePath.cpp">
+      <Filter>Source Files\fileutil</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_dump.cpp">
+      <Filter>Source Files\fileutil</Filter>
+    </ClCompile>
+    <ClCompile Include="filewrite.cpp">
+      <Filter>Source Files\fileutil</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>Source Files\fileutil</Filter>
+    </ClCompile>
+    <ClCompile Include="error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ttf.cpp">
+      <Filter>Source Files\ttf</Filter>
+    </ClCompile>
+    <ClCompile Include="ttfRender.cpp">
+      <Filter>Source Files\ttf</Filter>
+    </ClCompile>
+    <ClCompile Include="png.cpp">
+      <Filter>Source Files\img</Filter>
+    </ClCompile>
+    <ClCompile Include="xml.cpp">
+      <Filter>Source Files\simple_formats</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ID3.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\mpeg</Filter>
     </None>
   </ItemGroup>
 </Project>
