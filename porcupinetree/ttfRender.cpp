@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "ttfRender.hpp"
 #include "msutil.hpp"
 #include "bitmapRender.hpp"

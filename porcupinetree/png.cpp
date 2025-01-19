@@ -1,13 +1,10 @@
-#include "ptrconverter.hpp"
+#include <pch.h>
+
 #include "png.hpp"
+#include "balloon.hpp"
 
 const u64 sig[] = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
 const size_t sigSz = 8;
-
-//chunk types
-//#define IDHR 0x49484452
-//#define IDAT 0x49444152
-//#define IEND 0x49454e44
 
 enum chunk_type {
 	NULL_CHUNK = 0x0,
@@ -59,15 +56,10 @@ png_chunk readNextChunk(ByteStream& stream) {
 	return res;
 };
 
-arr_container<byte> DecodeIDHR(png_chunk c) {
+balloon_result DecodeIDHR(png_chunk c) {
 
 	//inflate everything
-	u32* uBytes = ptrconverter::convertTo<byte, u32>(c.dat, c.len);
-	ZResult* dat = Zlib::Inflate(uBytes, c.len);
-
-	arr_container<byte> res;
-
-	return res;
+	return Balloon::Inflate(c.dat, c.len);
 }
 
 /*png_file PngParse::Decode(std::string src) {

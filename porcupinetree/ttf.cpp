@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "ttf.hpp"
 
 const u32 ttf_magic = 0x5f0f3cf5;
@@ -424,12 +426,12 @@ ttfFile create_err_file(int code) {
 }
 
 ttfFile ttfParse::ParseTTFFile(std::string src) {
-    arr_container<byte> fBytes = FileWriter::ReadBytesFromBinFile(src);
+    file fBytes = FileWrite::readFromBin(src);
 
-    if (fBytes.dat == nullptr || fBytes.sz <= 0)
+    if (fBytes.dat == nullptr || fBytes.len <= 0)
         return create_err_file(1);
 
-    ttfFile r = ttfParse::ParseBin(fBytes.dat, fBytes.sz);
+    ttfFile r = ttfParse::ParseBin(fBytes.dat, fBytes.len);
     delete[] fBytes.dat;
 
     return r;
@@ -463,13 +465,13 @@ ttfFile ttfParse::ParseBin(byte* dat, size_t sz) {
 
 Glyph ttfParse::ReadTTFGlyph(std::string src, u32 id) {
     Glyph tGlyph;
-    arr_container<byte> fBytes = FileWriter::ReadBytesFromBinFile(src);
+    file fBytes = FileWrite::readFromBin(src);
 
-    if (fBytes.dat == nullptr || fBytes.sz <= 0)
+    if (fBytes.dat == nullptr || fBytes.len <= 0)
         return tGlyph;
 
     ttfFile f;
-    ttfStream fStream = ttfStream(fBytes.dat, fBytes.sz);
+    ttfStream fStream = ttfStream(fBytes.dat, fBytes.len);
 
     read_offset_tables(&fStream, &f);
 

@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "bitmap.hpp"
 
 #define BMP_SIG 0x4d42
@@ -55,4 +57,37 @@ i32 BitmapParse::WriteToFile(std::string src, Bitmap* bmp) {
     oStream.free();
 
     return 0;
+}
+
+Bitmap Bitmap::CreateBitmap(size_t w, size_t h) {
+    if (w < 0 || h < 0)
+        return { 0 };
+
+    const size_t allocSz = w * h;
+
+    BitmapHeader header = {
+        .fSz = allocSz,
+        .bmpSig = BMP_SIG,
+        .w = w, 
+        .h = h
+    };
+
+    Bitmap res = {
+        .header = header,
+        .data = new byte[allocSz]
+    };
+
+    ZeroMem(res.data, allocSz);
+
+    return res;
+}
+
+void Bitmap::Free(Bitmap* bmp)  {
+    if (!bmp) return;
+
+    if (bmp->data)
+        delete[] bmp->data;
+
+    bmp->data = nullptr;
+    bmp->header = {};
 }

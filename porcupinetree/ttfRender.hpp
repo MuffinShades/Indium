@@ -2,14 +2,7 @@
 #include "ttf.hpp"
 #include "bitmap.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define MSFL_COMPILE_DLL
-#define MSFL_EXPORTS
-
-#ifdef MSFL_COMPILE_DLL
+#ifdef MSFL_DLL
 #ifdef MSFL_EXPORTS
 #define MSFL_EXP __declspec(dllexport)
 #else
@@ -19,11 +12,19 @@ extern "C" {
 #define MSFL_EXP
 #endif
 
-    class ttfRender {
-    public:
-        MSFL_EXP static i32 RenderGlyphToBitmap(Glyph tGlyph, Bitmap* bmp, float scale = 1.0f);
-    };
+#ifdef MSFL_DLL
+#ifdef __cplusplus
+extern "C" {
+#endif
+#endif
 
+class ttfRender {
+public:
+    MSFL_EXP static i32 RenderGlyphToBitmap(Glyph tGlyph, Bitmap* bmp, float scale = 1.0f);
+};
+
+#ifdef MSFL_DLL
 #ifdef __cplusplus
 }
+#endif
 #endif

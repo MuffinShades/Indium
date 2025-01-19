@@ -1,3 +1,5 @@
+#include <pch.h>
+
 /**
  *
  * balloon.cpp
@@ -174,7 +176,7 @@ u64 bitReverse(u64 v, size_t nBits) {
  *
  */
 
-BitStream::BitStream(byte* bytes, size_t len) {
+BalloonStream::BalloonStream(byte* bytes, size_t len) {
     this->bytes = new byte[len];
     memcpy(this->bytes, bytes, len);
     this->bsz = len * 8;
@@ -184,7 +186,7 @@ BitStream::BitStream(byte* bytes, size_t len) {
     this->pos = 0;
 }
 
-BitStream::BitStream(size_t len) {
+BalloonStream::BalloonStream(size_t len) {
     assert(len > 0);
     this->bytes = new byte[len];
     memset(this->bytes, 0, len);
@@ -194,7 +196,7 @@ BitStream::BitStream(size_t len) {
     this->sz = 0;
 }
 
-i32 BitStream::readBit() {
+i32 BalloonStream::readBit() {
     if (this->lBit <= 0) {
         assert(this->pos < this->sz && this->pos >= 0);
 
@@ -212,12 +214,12 @@ i32 BitStream::readBit() {
     return bit; //return extracted bit
 }
 
-i32 BitStream::readByte() {
+i32 BalloonStream::readByte() {
     this->lBit = 0;
     return this->bytes[this->pos++];
 }
 
-i32 BitStream::readNBits(i32 nBits) {
+i32 BalloonStream::readNBits(i32 nBits) {
     u32 r = 0, c = 0;
 
     while (c < nBits) {
@@ -227,30 +229,30 @@ i32 BitStream::readNBits(i32 nBits) {
     return r;
 }
 
-i32 BitStream::tell() {
+i32 BalloonStream::tell() {
     return this->pos;
 }
 
-i32 BitStream::tellw() {
+i32 BalloonStream::tellw() {
     return this->rPos;
 }
 
-void BitStream::seekw(i32 wPos) {
+void BalloonStream::seekw(i32 wPos) {
     assert(wPos >= 0 && wPos < this->asz);
     this->rPos = wPos;
 }
 
-void BitStream::seek(i32 pos) {
+void BalloonStream::seek(i32 pos) {
     assert(pos >= 0 && pos < this->asz);
     this->pos = pos;
 }
 
-void BitStream::checkWritePosition() {
+void BalloonStream::checkWritePosition() {
     if (this->rPos >= this->asz)
         this->allocNewChunk();
 }
 
-i32 BitStream::readValue(size_t size) {
+i32 BalloonStream::readValue(size_t size) {
     i32 r = 0;
     for (size_t i = 0; i < size; i++)
         r |= (this->readByte() << (i * 8));
@@ -258,7 +260,7 @@ i32 BitStream::readValue(size_t size) {
     return r;
 }
 
-u32* BitStream::bitsToBytes(u32* bits, size_t len) {
+u32* BalloonStream::bitsToBytes(u32* bits, size_t len) {
     u32* res = new u32[(u32)ceil((float)len / 8.0f)];
 
     i32 bCollect = 0, iBit = 0, cByte = 0;
@@ -277,7 +279,7 @@ u32* BitStream::bitsToBytes(u32* bits, size_t len) {
     return res;
 }
 
-u32* BitStream::bitsToBytes(u32 bits, size_t len) {
+u32* BalloonStream::bitsToBytes(u32 bits, size_t len) {
     u32* res = new u32[(u32)ceil((float)len / 8.0f)];
 
     i32 bCollect = 0, iBit = 0, cByte = 0;
@@ -296,7 +298,7 @@ u32* BitStream::bitsToBytes(u32 bits, size_t len) {
     return res;
 }
 
-void BitStream::writeBit(u32 bit) {
+void BalloonStream::writeBit(u32 bit) {
     //now write bit
     this->bytes[this->rPos] |= ((bit & 1) << (this->rBit++)); //& with 1 to just get first bit
     //advance a byte if were out of range
@@ -308,12 +310,12 @@ void BitStream::writeBit(u32 bit) {
     }
 }
 
-void BitStream::writeNBits(u32* bits, size_t len) {
+void BalloonStream::writeNBits(u32* bits, size_t len) {
     for (size_t i = 0; i < len; i++)
         this->writeBit(bits[i]);
 }
 
-template<typename _T> void t_writeValue(BitStream* s, _T val) {
+template<typename _T> void t_writeValue(BalloonStream* s, _T val) {
     size_t vsz = sizeof(_T) * 8;
 
     for (i32 i = 0; i < vsz; i++)
@@ -321,32 +323,32 @@ template<typename _T> void t_writeValue(BitStream* s, _T val) {
 }
 
 //dll template fix
-void BitStream::writeValue(byte val) {
+void BalloonStream::writeValue(byte val) {
     t_writeValue(this, val);
 }
 
-void BitStream::writeValue(short val) {
+void BalloonStream::writeValue(short val) {
     t_writeValue(this, val);
 }
 
-void BitStream::writeValue(i32 val) {
+void BalloonStream::writeValue(i32 val) {
     t_writeValue(this, val);
 }
 
-void BitStream::writeValue(u32 val) {
+void BalloonStream::writeValue(u32 val) {
     t_writeValue(this, val);
 }
 
-void BitStream::writeValue(i64 val) {
+void BalloonStream::writeValue(i64 val) {
     t_writeValue(this, val);
 }
 
-void BitStream::writeValue(u64 val) {
+void BalloonStream::writeValue(u64 val) {
     t_writeValue(this, val);
 }
 
 //
-void BitStream::allocNewChunk() {
+void BalloonStream::allocNewChunk() {
     this->asz += 0xffff;
     byte* tBytes = new byte[this->asz];
     memset(tBytes, 0, this->asz);
@@ -355,7 +357,7 @@ void BitStream::allocNewChunk() {
     this->bytes = tBytes;
 }
 
-void BitStream::writeBytes(byte* dat, size_t nBytes) {
+void BalloonStream::writeBytes(byte* dat, size_t nBytes) {
     if (!dat || nBytes <= 0) return;
     const size_t nLen = this->sz + nBytes;
     while (this->asz < nLen)
@@ -364,7 +366,7 @@ void BitStream::writeBytes(byte* dat, size_t nBytes) {
     this->sz = nLen;
 }
 
-void BitStream::clip() {
+void BalloonStream::clip() {
     //wtf???
     byte* tBytes = new byte[this->asz];
     u32 osz = this->asz;
@@ -377,7 +379,7 @@ void BitStream::clip() {
     delete[] tBytes;
 }
 
-void BitStream::calloc(size_t sz) {
+void BalloonStream::calloc(size_t sz) {
     if (this->bytes)
         delete[] this->bytes;
 
@@ -394,7 +396,7 @@ void BitStream::calloc(size_t sz) {
 }
 
 
-void WriteVBitsToStream(BitStream& stream, u64 val, size_t nBits) {
+void WriteVBitsToStream(BalloonStream& stream, u64 val, size_t nBits) {
     if (nBits <= 0) return;
 
     val &= (1 << nBits) - 1;
@@ -403,7 +405,7 @@ void WriteVBitsToStream(BitStream& stream, u64 val, size_t nBits) {
         stream.writeBit((val >> i) & 1);
 }
 
-void WriteVPBitsToStream(BitStream& stream, u64 val, size_t nBits) {
+void WriteVPBitsToStream(BalloonStream& stream, u64 val, size_t nBits) {
     if (nBits <= 0) return;
 
     for (i32 i = 0; i < nBits; i++)
@@ -1158,7 +1160,7 @@ u32 EncodeSymbol(u32 sym, huffman_node* tree) {
  *
  */
 
-u32 DecodeSymbol(BitStream* stream, huffman_node* tree) {
+u32 DecodeSymbol(BalloonStream* stream, huffman_node* tree) {
     huffman_node* n = tree;
 
     while (n->left || n->right) {
@@ -1506,7 +1508,7 @@ _codeLenInf _tree_rle_encode(u32* ccLens, size_t nc, const size_t codeLengthAlph
 //goal: encode literal and distance tree
 //
 //
-void _stream_tree_write(BitStream* stream, HuffmanTreeInfo* litTree, HuffmanTreeInfo* distTree) {
+void _stream_tree_write(BalloonStream* stream, HuffmanTreeInfo* litTree, HuffmanTreeInfo* distTree) {
     if (!litTree || !distTree || !stream) {
         std::cout << "Error invalid tree!" << std::endl;
         return;
@@ -1660,7 +1662,7 @@ void _stream_tree_write(BitStream* stream, HuffmanTreeInfo* litTree, HuffmanTree
  * just a thought, make sure lz77_encode doesn't write the 0x100 at all
  *
  */
-void _lzr_stream_write(BitStream* stream, lzr* l, u32* checksum, bool writeCapByte = true) {
+void _lzr_stream_write(BalloonStream* stream, lzr* l, u32* checksum, bool writeCapByte = true) {
     if (!stream || !l)
         return;
 
@@ -1748,7 +1750,7 @@ enum deflate_block_type {
  * Compresses the data given then writes a deflate block to the given stream
  *
  */
-i32 WriteDeflateBlockToStream(BitStream* stream, bin* block_data, const size_t winBits, const i32 level, u32* checksum, bool finalBlock = false) {
+i32 WriteDeflateBlockToStream(BalloonStream* stream, bin* block_data, const size_t winBits, const i32 level, u32* checksum, bool finalBlock = false) {
     deflate_block_type bType = level > 0 ? dfb_dynamic : dfb_none;
 
     //write some info
@@ -1842,7 +1844,7 @@ balloon_result Balloon::Deflate(byte* data, size_t sz, u32 compressionLevel, con
     //quick error check
     if (!data || sz <= 0 || winBits > 15) return {};
 
-    BitStream rStream = BitStream(0xff);
+    BalloonStream rStream = BalloonStream(0xff);
 
     //generate some of the fields
     byte cmf = (0x08) | (((winBits - 8) & 0b1111) << 4);
@@ -1924,7 +1926,7 @@ struct InflateBlock {
  * the lit tree and the second is the distance tree
  *
  */
-huffman_node** _decode_trees(BitStream* stream) {
+huffman_node** _decode_trees(BalloonStream* stream) {
     if (!stream)
         return nullptr;
 
@@ -2037,7 +2039,7 @@ huffman_node** _decode_trees(BitStream* stream) {
     return _tContain;
 }
 
-void _inflate_block_generic(InflateBlock* block, BitStream* stream, huffman_node* litTree, huffman_node* distTree) {
+void _inflate_block_generic(InflateBlock* block, BalloonStream* stream, huffman_node* litTree, huffman_node* distTree) {
     if (!litTree || !distTree)
         return;
 
@@ -2081,7 +2083,7 @@ void _inflate_block_generic(InflateBlock* block, BitStream* stream, huffman_node
     memcpy(block->data, dec_data.data(), block->sz);
 }
 
-void _inflate_block_none(InflateBlock* block, BitStream* stream) {
+void _inflate_block_none(InflateBlock* block, BalloonStream* stream) {
     if (!block || !stream)
         return;
 
@@ -2095,7 +2097,7 @@ void _inflate_block_none(InflateBlock* block, BitStream* stream) {
         * b = stream->readByte();
 }
 
-void _inflate_block_static(InflateBlock* block, BitStream* stream) {
+void _inflate_block_static(InflateBlock* block, BalloonStream* stream) {
     if (!block || !stream)
         return;
 
@@ -2139,7 +2141,7 @@ void _inflate_block_static(InflateBlock* block, BitStream* stream) {
     TreeFree(llTree);
 }
 
-void _inflate_block_dynamic(InflateBlock* block, BitStream* stream) {
+void _inflate_block_dynamic(InflateBlock* block, BalloonStream* stream) {
     if (!block || !stream)
         return;
 
@@ -2159,7 +2161,7 @@ void _inflate_block_dynamic(InflateBlock* block, BitStream* stream) {
 }
 
 //
-InflateBlock _stream_block_inflate(BitStream* stream) {
+InflateBlock _stream_block_inflate(BalloonStream* stream) {
     if (!stream)
         return { 0 };
 
@@ -2193,7 +2195,7 @@ balloon_result Balloon::Inflate(byte* data, size_t sz) {
         return {};
 
     //create a simple stream
-    BitStream datStream = BitStream(data, sz);
+    BalloonStream datStream = BalloonStream(data, sz);
 
     byte cmf = datStream.readByte();
     byte flg = datStream.readByte();
@@ -2258,6 +2260,12 @@ balloon_result Balloon::Inflate(byte* data, size_t sz) {
     }
 
     return res;
+}
+
+void Balloon::Free(balloon_result* res) {
+    if (!res) return;
+    _safe_free_a(res->data);
+    ZeroMem(res, sizeof(balloon_result));
 }
 
 enum file_stream_type {

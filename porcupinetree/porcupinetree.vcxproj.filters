@@ -67,6 +67,12 @@
     <Filter Include="Header Files\img">
       <UniqueIdentifier>{5663d5cd-b749-406c-850f-b764c14e3050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\encryption">
+      <UniqueIdentifier>{3f5fbd2f-f9d2-495d-9e82-23b208600e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\encryption">
+      <UniqueIdentifier>{4307daf6-646f-4160-a6fd-0d8eca673bdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="types.hpp">
@@ -153,6 +159,12 @@
     <ClInclude Include="xml.hpp">
       <Filter>Header Files\simple_formats</Filter>
     </ClInclude>
+    <ClInclude Include="aes.hpp">
+      <Filter>Header Files\encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="sha.hpp">
+      <Filter>Header Files\encryption</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -223,6 +235,12 @@
     </ClCompile>
     <ClCompile Include="xml.cpp">
       <Filter>Source Files\simple_formats</Filter>
+    </ClCompile>
+    <ClCompile Include="aes.cpp">
+      <Filter>Source Files\encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="sha.cpp">
+      <Filter>Source Files\encryption</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

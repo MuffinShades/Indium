@@ -2,14 +2,7 @@
 #include <iostream>
 #include "msutil.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define MSFL_COMPILE_DLL
-#define MSFL_EXPORTS
-
-#ifdef MSFL_COMPILE_DLL
+#ifdef MSFL_DLL
 #ifdef MSFL_EXPORTS
 #define MSFL_EXP __declspec(dllexport)
 #else
@@ -17,6 +10,12 @@ extern "C" {
 #endif
 #else
 #define MSFL_EXP
+#endif
+
+#ifdef MSFL_DLL
+#ifdef __cplusplus
+extern "C" {
+#endif
 #endif
 
     class Date {
@@ -35,6 +34,8 @@ extern "C" {
         MSFL_EXP std::string getString();
     };
 
+#ifdef MSFL_DLL
 #ifdef __cplusplus
 }
+#endif
 #endif

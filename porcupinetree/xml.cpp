@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "xml.hpp"
 #include <cstring>
 #include <fstream>

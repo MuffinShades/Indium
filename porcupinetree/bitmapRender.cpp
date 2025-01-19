@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "bitmapRender.hpp"
 
 //changes le resolution of a color
@@ -27,8 +29,6 @@ void BitmapGraphics::Clear() {
 
 void BitmapGraphics::DrawPixel(u32 x, u32 y) {
     const u32 bpp = this->bmp->header.bitsPerPixel;
-
-    //std::cout << "BPP: " << bpp << std::endl;
 
     if (bpp < 16) {
         std::cout << "Bitmap Graphics Error: No support for bpp < 16!" << std::endl;

@@ -1,3 +1,6 @@
+#include <pch.h>
+
+
 #include "filewrite.hpp"
 
 bool FileWrite::writeToBin(std::string src, byte* dat, size_t sz) {

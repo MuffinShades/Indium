@@ -10,14 +10,7 @@
  *
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define MSFL_COMPILE_DLL
-#define MSFL_EXPORTS
-
-#ifdef MSFL_COMPILE_DLL
+#ifdef MSFL_DLL
 #ifdef MSFL_EXPORTS
 #define MSFL_EXP __declspec(dllexport)
 #else
@@ -25,6 +18,12 @@ extern "C" {
 #endif
 #else
 #define MSFL_EXP
+#endif
+
+#ifdef MSFL_DLL
+#ifdef __cplusplus
+extern "C" {
+#endif
 #endif
 
     struct _bmpColor {
@@ -43,6 +42,8 @@ extern "C" {
         MSFL_EXP void Clear();
     };
 
+#ifdef MSFL_DLL
 #ifdef __cplusplus
 }
+#endif
 #endif

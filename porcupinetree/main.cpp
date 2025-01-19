@@ -1,3 +1,6 @@
+#include <pch.h>
+#ifndef MSFL_DLL
+
 #include <iostream>
 #include "h264.hpp"
 #include "bitstream.hpp"
@@ -25,3 +28,5 @@ i32 main(void) {
 
 	return 0;
 }
+
+#endif

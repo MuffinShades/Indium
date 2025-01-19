@@ -77,6 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32;WIN32;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\chris\source\repos\porcupinetree\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -92,6 +93,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32;WIN32;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\chris\source\repos\porcupinetree\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,6 +109,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32;WIN32;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\chris\source\repos\porcupinetree\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,6 +125,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WIN32;WIN32;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\chris\source\repos\porcupinetree\pch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aes.hpp" />
     <ClInclude Include="asset.hpp" />
     <ClInclude Include="balloon.hpp" />
     <ClInclude Include="binary_dump.hpp" />
@@ -155,12 +160,14 @@
     <ClInclude Include="nal.hpp" />
     <ClInclude Include="png.hpp" />
     <ClInclude Include="realigned_buffer.hpp" />
+    <ClInclude Include="sha.hpp" />
     <ClInclude Include="ttf.hpp" />
     <ClInclude Include="ttfRender.hpp" />
     <ClInclude Include="types.hpp" />
     <ClInclude Include="xml.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aes.cpp" />
     <ClCompile Include="asset.cpp" />
     <ClCompile Include="balloon.cpp" />
     <ClCompile Include="binary_dump.cpp" />
@@ -181,6 +188,7 @@
     <ClCompile Include="mp4.cpp" />
     <ClCompile Include="nal.cpp" />
     <ClCompile Include="png.cpp" />
+    <ClCompile Include="sha.cpp" />
     <ClCompile Include="ttf.cpp" />
     <ClCompile Include="ttfRender.cpp" />
     <ClCompile Include="xml.cpp" />

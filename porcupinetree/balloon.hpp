@@ -37,10 +37,24 @@
 #include <cstring>
 #include "msutil.hpp"
 
+#ifdef MSFL_DLL
+#ifdef MSFL_EXPORTS
+#define MSFL_EXP __declspec(dllexport)
+#else
+#define MSFL_EXP __declspec(dllimport)
+#endif
+#else
 #define MSFL_EXP
+#endif
+
+#ifdef MSFL_DLL
+#ifdef __cplusplus
+extern "C" {
+#endif
+#endif
 
  //bit stream class for reading and doing stuff with bits
-class BitStream {
+class BalloonStream {
 public:
 	byte* bytes = nullptr;
 	i32 pos = 0, rPos = 0;
@@ -49,9 +63,9 @@ public:
 	u32 rBit = 0;
 	size_t sz, bsz, asz;
 	//bit stream for reading existing bytes / bits
-	MSFL_EXP BitStream(byte* bytes, size_t len);
+	MSFL_EXP BalloonStream(byte* bytes, size_t len);
 	//basic zero allocation bit stream for writing
-	MSFL_EXP BitStream(size_t len);
+	MSFL_EXP BalloonStream(size_t len);
 	MSFL_EXP i32 readBit();
 	MSFL_EXP i32 readByte();
 	MSFL_EXP i32 readNBits(i32 nBits);
@@ -79,7 +93,7 @@ public:
 	MSFL_EXP void clip();
 	//allocation function
 	MSFL_EXP void calloc(size_t sz);
-	void writeBytes(byte* dat, size_t nBytes);
+	MSFL_EXP void writeBytes(byte* dat, size_t nBytes);
 };
 
 struct balloon_result {
@@ -101,4 +115,11 @@ public:
 	static balloon_result MultiThreadDeflate(byte* data, size_t sz, i32 maxThreads = BALLOON_MAX_THREADS_AUTO);
 	static bool MultiThreadDeflateFileToFile(std::string in_src, std::string out_src, i32 maxThreads = BALLOON_MAX_THREADS_AUTO, u32 compressionLevel = 2, const size_t winBits = 0xf);
 	static bool MultiThreadInflateFileToFile(std::string in_src, std::string out_src, i32 maxThreads = BALLOON_MAX_THREADS_AUTO);
+	MSFL_EXP static void Free(balloon_result* res);
 };
+
+#ifdef MSFL_DLL
+#ifdef __cplusplus
+}
+#endif
+#endif

@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "bitstream.hpp"
 
 //returns current bit

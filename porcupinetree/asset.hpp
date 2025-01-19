@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * ---------------------------------------
  * Game Asset file format
@@ -19,21 +21,20 @@
 #include "Date.hpp"
 #include "FilePath.hpp"
 
-#define MSFL_COMPILE_DLL
-#define MSFL_EXPORTS
+#ifdef MSFL_DLL
+#ifdef MSFL_EXPORTS
+#define MSFL_EXP __declspec(dllexport)
+#else
+#define MSFL_EXP __declspec(dllimport)
+#endif
+#else
+#define MSFL_EXP
+#endif
 
+#ifdef MSFL_DLL
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#ifdef MSFL_COMPILE_DLL
-#ifdef MSFL_EXPORTS
-#define MSFL_LIB __declspec(dllexport)
-#else
-#define MSFL_LIB __declspec(dllimport)
-#endif
-#else
-#define MSFL_LIB
 #endif
 
     struct AssetDescriptor {
@@ -54,8 +55,8 @@ extern "C" {
         size_t sz;
         byte* bytes = nullptr;
         bool stream = false, __nb_free = false;
-        MSFL_LIB ~Asset();
-        MSFL_LIB void free();
+        MSFL_EXP ~Asset();
+        MSFL_EXP void free();
     };
 
     enum _aContainerType {
@@ -70,87 +71,89 @@ extern "C" {
         std::string id = "";
     public:
         std::vector<AssetContainer*> assets;
-        MSFL_LIB AssetContainer* GetNode(std::string id);
-        MSFL_LIB Asset* GetAsset(std::string id);
-        MSFL_LIB Asset* GetAssetData() {
+        MSFL_EXP AssetContainer* GetNode(std::string id);
+        MSFL_EXP Asset* GetAsset(std::string id);
+        MSFL_EXP Asset* GetAssetData() {
             return &this->_assetData;
         };
-        MSFL_LIB void SetAssetData(Asset a);
-        MSFL_LIB void AddAsset(std::string id, byte* data, size_t sz, AssetDescriptor desc = {});
+        MSFL_EXP void SetAssetData(Asset a);
+        MSFL_EXP void AddAsset(std::string id, byte* data, size_t sz, AssetDescriptor desc = {});
         void AddAsset(std::string id, std::string fSrc);
-        MSFL_LIB void AddAsset(std::string id, AssetDescriptor desc);
-        MSFL_LIB AssetContainer* AddContainer(std::string id);
-        MSFL_LIB void SetId(std::string id);
-        MSFL_LIB std::string GetId();
-        MSFL_LIB AssetContainer(std::string id = "");
-        MSFL_LIB ~AssetContainer();
-        MSFL_LIB size_t getNAssets() {
+        MSFL_EXP void AddAsset(std::string id, AssetDescriptor desc);
+        MSFL_EXP AssetContainer* AddContainer(std::string id);
+        MSFL_EXP void SetId(std::string id);
+        MSFL_EXP std::string GetId();
+        MSFL_EXP AssetContainer(std::string id = "");
+        MSFL_EXP ~AssetContainer();
+        MSFL_EXP size_t getNAssets() {
             return this->assets.size();
         }
-        MSFL_LIB enum _aContainerType getType() {
+        MSFL_EXP enum _aContainerType getType() {
             return this->_ty;
         }
     };
 
-    class AssetStruct {
-    private:
-        AssetContainer* map;
-    public:
-        MSFL_LIB Asset* GetAsset(std::string path);
-        MSFL_LIB void AddAsset(std::string path, byte* data, size_t sz, AssetDescriptor desc = {});
-        MSFL_LIB void AddAsset(std::string path, std::string fSrc);
-        MSFL_LIB void AddAsset(std::string path, AssetDescriptor desc);
-        MSFL_LIB AssetContainer* GetRoot() {
-            return this->map;
-        };
-        MSFL_LIB AssetStruct() {
-            this->map = new AssetContainer("root");
-        };
-        MSFL_LIB ~AssetStruct();
+class AssetStruct {
+private:
+    AssetContainer* map;
+public:
+    MSFL_EXP Asset* GetAsset(std::string path);
+    MSFL_EXP void AddAsset(std::string path, byte* data, size_t sz, AssetDescriptor desc = {});
+    MSFL_EXP void AddAsset(std::string path, std::string fSrc);
+    MSFL_EXP void AddAsset(std::string path, AssetDescriptor desc);
+    MSFL_EXP AssetContainer* GetRoot() {
+        return this->map;
     };
-
-    class AssetFile {
-    private:
-        byte* data = nullptr;
-        size_t sz = 0;
-        size_t rootOffset = 0;
-    public:
-        AssetStruct constructStruct();
-        Asset getAsset(std::string path);
-        AssetContainer constructContainer(std::string path);
-        byte* getDataPtr();
+    MSFL_EXP AssetStruct() {
+        this->map = new AssetContainer("root");
     };
+    MSFL_EXP ~AssetStruct();
+};
 
-    //TODO: v1.1
-    class AssetInstance {
-        AssetStruct fMap;
-        ByteStream fStream;
-        MSFL_LIB ~AssetInstance() {
-            fStream.free();
-        }
-        MSFL_LIB AssetInstance() {}
-        Asset GetAsset(std::string path);
-        MSFL_LIB AssetInstance(ByteStream fStream, AssetStruct fMap) {
-            this->fStream = fStream;
-            this->fMap = fMap;
-        }
-    };
+class AssetFile {
+private:
+    byte* data = nullptr;
+    size_t sz = 0;
+    size_t rootOffset = 0;
+public:
+    AssetStruct constructStruct();
+    Asset getAsset(std::string path);
+    AssetContainer constructContainer(std::string path);
+    byte* getDataPtr();
+};
 
-    class AssetParse {
-    public:
-        MSFL_LIB static int WriteToFile(std::string src, AssetStruct* dat); //done
-        static byte* WriteToBytes(AssetStruct* dat); //technically done
-        MSFL_LIB static int WriteToFile(std::string src, std::string jsonMap, std::string parentDir = ""); //done
-        MSFL_LIB static AssetStruct ParseAssetFile(std::string src); //done
-        static AssetStruct ParseDat(byte* dat, size_t sz); //technically done
-        static AssetFile ReadFile(std::string src);
-        MSFL_LIB static JStruct ReadFileMapAsJson(std::string src); //done
-        MSFL_LIB static JStruct ReadFileMapAsJson(byte* dat, size_t sz); //done
-        MSFL_LIB static Asset ExtractAssetFromFile(std::string src, std::string path, bool streamData = false); //done
-        static Asset ExtractAssetFromFile(std::string src, std::string path, JStruct assetMap, bool streamData = false); // mostly done
-        static Asset ExtractAssetFromData(byte* dat, size_t sz, bool streamData = false); // technically done
-    };
+//TODO: v1.1
+class AssetInstance {
+    AssetStruct fMap;
+    ByteStream fStream;
+    MSFL_EXP ~AssetInstance() {
+        fStream.free();
+    }
+    MSFL_EXP AssetInstance() {}
+    Asset GetAsset(std::string path);
+    MSFL_EXP AssetInstance(ByteStream fStream, AssetStruct fMap) {
+        this->fStream = fStream;
+        this->fMap = fMap;
+    }
+};
 
+class AssetParse {
+public:
+    MSFL_EXP static int WriteToFile(std::string src, AssetStruct* dat); //done
+    static byte* WriteToBytes(AssetStruct* dat); //technically done
+    MSFL_EXP static int WriteToFile(std::string src, std::string jsonMap, std::string parentDir = ""); //done
+    MSFL_EXP static AssetStruct ParseAssetFile(std::string src); //done
+    static AssetStruct ParseDat(byte* dat, size_t sz); //technically done
+    static AssetFile ReadFile(std::string src);
+    MSFL_EXP static JStruct ReadFileMapAsJson(std::string src); //done
+    MSFL_EXP static JStruct ReadFileMapAsJson(byte* dat, size_t sz); //done
+    MSFL_EXP static Asset ExtractAssetFromFile(std::string src, std::string path, bool streamData = false); //done
+    static Asset ExtractAssetFromFile(std::string src, std::string path, JStruct assetMap, bool streamData = false); // mostly done
+    static Asset ExtractAssetFromData(byte* dat, size_t sz, bool streamData = false); // technically done
+};
+
+#ifdef MSFL_DLL
 #ifdef __cplusplus
 }
+#endif
 #endif

@@ -1,3 +1,5 @@
+#include <pch.h>
+
 #include "binary_dump.hpp"
 #include <string>
 
