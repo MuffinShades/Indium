@@ -1,23 +1,34 @@
-# Media Muffin
+# Indium
 
-encoder and decoder for the following file types:
+C++ library that contains tools to parse and edit various file types and files in general
 
-.mp3,
-.mp4,
-.mov,
-.m4a,
-.bmp,
-.png,
-.jpg,
-.ogg,
-.bmp,
-.avi,
-and .wav
+Planning to include Encoders and Decoders for the follwing files types:
 
-Also has encoding and decoding for the following codecs:
+.txt
+.bin
+.png
+.jpg
+.inf
+.ini
+.cfg
+.json
+.xml
+.yml
+.mp3
+.mp4
+.avi
+.av4
+.mov
+.ogg
+.zip
+.wav
+.bmp
+.ttf
+and more
 
-MPEG-2 Layer III,
-AVC,
-and H.264,
+Also will include support for various encryption algorithms, compression algorithms, and codecs:
 
-asdf
+deflate / inflate
+aes
+sha
+h264
