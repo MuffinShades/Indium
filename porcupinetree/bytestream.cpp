@@ -2,9 +2,9 @@
 
 #include "ByteStream.hpp"
 
-#define __glb_sz_short 2
-#define __glb_sz_int 4
-#define __glb_sz_long 8
+constexpr size_t __glb_sz_short = 2;
+constexpr size_t __glb_sz_int = 4;
+constexpr size_t __glb_sz_long = 8;
 
 void ByteStream::allocNewChunk()
 {
@@ -13,22 +13,14 @@ void ByteStream::allocNewChunk()
 
 void ByteStream::allocBytes(size_t sz) 
 {
-    if (!this->bytes || this->allocSz <= 0) {
-        this->allocSz = sz;
-        if (this->bytes)
-            delete[] this->bytes;
-
-        this->bytes = new byte[this->allocSz];
-        ZeroMem(this->bytes, this->allocSz);
-    }
     if (sz <= 0)
         return;
     this->allocSz += sz;
     byte* tmp = new byte[this->allocSz];
     ZeroMem(tmp, this->allocSz);
-    if (this->len > 0)
-        memcpy(tmp, this->bytes, this->len * sizeof(byte));
-    if (this->bytes != nullptr)
+    if (this->len > 0 && this->bytes)
+        memcpy(tmp, this->bytes, this->len);
+    if (this->bytes)
         delete[] this->bytes;
     this->bytes = tmp;
 }
@@ -59,22 +51,22 @@ byte ByteStream::readByte()
     return this->bytes[this->readPos++];
 }
 
-unsigned long long ByteStream::readBytesAsVal(size_t nBytes)
+u64 ByteStream::readBytesAsVal(size_t nBytes)
 {
     if (nBytes <= 0)
-        return 0;
-    unsigned long long res = 0u;
+        return 0u;
+    u64 res = 0u;
     switch (this->mode)
     {
     case bmode_BigEndian:
     {
-        for (int i = nBytes - 1; i >= 0; i--)
-            res |= (this->_readByte() << (i * 8));
+        for (i32 i = nBytes - 1; i >= 0; i--)
+            res |= (this->_readByte() << ((unsigned)i * 8u));
         break;
     }
     case bmode_LittleEndian:
     {
-        for (int i = 0; i < nBytes; i++)
+        for (size_t i = 0; i < nBytes; i++)
             res |= (this->_readByte() << (i * 8));
         break;
     }
@@ -95,51 +87,48 @@ byte* ByteStream::readBytes(size_t nBytes) {
     return res;
 }
 
-short ByteStream::readInt16()
+i16 ByteStream::readInt16()
 {
     return (short)this->readBytesAsVal(__glb_sz_short);
 }
 
-unsigned short ByteStream::readUInt16()
+u16 ByteStream::readUInt16()
 {
     return (unsigned)this->readInt16();
 }
 
-int ByteStream::readInt32()
+i32 ByteStream::readInt32()
 {
     return (int)this->readBytesAsVal(__glb_sz_int);
 }
 
-unsigned int ByteStream::readUInt32()
+u32 ByteStream::readUInt32()
 {
     return (unsigned)this->readInt32();
 }
 
-int64_t ByteStream::readInt64()
+i64 ByteStream::readInt64()
 {
     return (int64_t)this->readBytesAsVal(__glb_sz_long);
 }
 
-uint64_t ByteStream::readUInt64()
+u64 ByteStream::readUInt64()
 {
     return (uint64_t)this->readInt64();
 }
 
 void ByteStream::writeByte(byte b) {
-    if (++this->len > this->allocSz)
-        this->allocNewChunk();
-    this->bytes[this->len - 1] = b;
-    this->byteWriteAdv();
+    this->_writeByte(b);
 }
 
 void ByteStream::_writeByte(byte b) {
     if (++this->len > this->allocSz)
         this->allocNewChunk();
-    this->bytes[this->len - 1] = b;
-    this->byteWriteAdv();
+    this->bytes[this->writePos++] = b;
+    //this->byteWriteAdv();
 }
 
-void ByteStream::writeNBytesAsVal(unsigned long long v, size_t nBytes)
+void ByteStream::writeNBytesAsVal(u64 v, size_t nBytes)
 {
     if (nBytes <= 0)
         return;
@@ -148,44 +137,44 @@ void ByteStream::writeNBytesAsVal(unsigned long long v, size_t nBytes)
     case bmode_BigEndian:
     {
         for (int i = nBytes - 1; i >= 0; i--)
-            this->_writeByte((v >> (i * 8)) & 0xff);
+            this->_writeByte((v >> (i * 8u)) & 0xff);
         break;
     }
     case bmode_LittleEndian:
     {
-        for (int i = 0; i < nBytes; i++)
+        for (size_t i = 0; i < nBytes; i++)
             this->_writeByte((v >> (i * 8)) & 0xff);
         break;
     }
     }
 }
 
-void ByteStream::writeInt16(short v)
+void ByteStream::writeInt16(i16 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_short);
 }
 
-void ByteStream::writeUInt16(unsigned short v)
+void ByteStream::writeUInt16(u16 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_short);
 }
 
-void ByteStream::writeInt32(int v)
+void ByteStream::writeInt32(i32 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_int);
 }
 
-void ByteStream::writeUInt32(unsigned int v)
+void ByteStream::writeUInt32(u32 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_int);
 }
 
-void ByteStream::writeInt64(int64_t v)
+void ByteStream::writeInt64(i64 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_long);
 }
 
-void ByteStream::writeUInt64(uint64_t v)
+void ByteStream::writeUInt64(u64 v)
 {
     this->writeNBytesAsVal(v, __glb_sz_long);
 }
@@ -287,7 +276,7 @@ byte ByteStream::_readByte()
 
 //advances another byte when writing stuff
 void ByteStream::byteWriteAdv() {
-    if (this->readPos == this->writePos++)
+    if (this->readPos == this->writePos)
         this->readPos = this->writePos;
 
     if (this->writePos >= this->len)

@@ -6,6 +6,7 @@
 #include "bitstream.hpp"
 #include "binary_dump.hpp"
 #include "mp3.hpp"
+#include "png.hpp"
 
 i32 main(void) {
 	std::cout << "Muffin Media!" << std::endl;
@@ -25,6 +26,9 @@ i32 main(void) {
 	//BinDump::dump(testStream.getBytePtr(), testStream.getSize());
 
 	mp3_audio test_mp3 = mp3::fileDecode("C:\\mpegtest\\audio2.mp3");
+
+	//png testing
+	png_file png_decode = PngParse::Decode("C:\\mpegtest\\png_test.png");
 
 	return 0;
 }

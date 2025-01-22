@@ -154,12 +154,22 @@ template<typename _Ty> static inline void _safe_free_b(_Ty* m) {
 }
 
 template<typename _Ty> static _Ty ArrMax(_Ty* arr, size_t len) {
-    auto max = 0;
+    _Ty max = 0;
 
     for (size_t i = 0; i < len; i++)
         if (arr[i] > max) max = arr[i];
 
     return max;
+}
+
+template<typename _Ty> static void memfill(void* ptr, _Ty val, size_t nCopy) {
+    if (nCopy < 0 || !ptr)
+        return;
+
+    _Ty* t_ptr = (_Ty*)ptr;
+
+    for (size_t i = 0; i < nCopy; i++)
+        *t_ptr++ = val;
 }
 
 static u64 NumReverse(u64 v, size_t bSz) {
@@ -233,3 +243,12 @@ template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
 
 	return true;
 }
+
+//fast version of modulo for certain bases
+#define fast_modBase2(val, shift) ((val)-(((val) >> 1) << 1))
+#define fast_mod2(val) modBase2(val, 1)
+#define fast_mod4(val) modBase2(val, 2)
+#define fast_mod8(val) modBase2(val, 3)
+#define fast_mod16(val) modBase2(val, 4)
+#define fast_mod32(val) modBase2(val, 5)
+#define fast_mod64(val) modBase2(val, 6)

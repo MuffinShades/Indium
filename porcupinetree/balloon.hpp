@@ -94,6 +94,8 @@ public:
 	//allocation function
 	MSFL_EXP void calloc(size_t sz);
 	MSFL_EXP void writeBytes(byte* dat, size_t nBytes);
+	MSFL_EXP void detach();
+	MSFL_EXP void free();
 };
 
 struct balloon_result {

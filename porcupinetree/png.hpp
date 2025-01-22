@@ -15,6 +15,7 @@ struct png_file {
 };
 
 class PngParse {
+public:
 	static png_file Decode(std::string src);
 	static png_file DecodeBytes(byte* bytes, size_t sz);
 	static bool Encode(png_file p);

@@ -6,6 +6,10 @@
 #define BMP_HEADER_SZ 40
 
 int write_bmp_header(Bitmap* bmp, ByteStream* stream) {
+    std::cout << "Bmp Header Write" << std::endl;
+    std::cout << "Sz: " << BMP_HEADER_SZ << std::endl;
+    std::cout << "Width: " << bmp->header.w << std::endl;
+    std::cout << "Height: " << bmp->header.h << std::endl;
     stream->writeUInt32(BMP_HEADER_SZ); //write header size
     stream->writeUInt32(bmp->header.w);
     stream->writeUInt32(bmp->header.h);
@@ -27,6 +31,8 @@ i32 BitmapParse::WriteToFile(std::string src, Bitmap* bmp) {
         !bmp->data
         ) return 1;
 
+    std::cout << "Writing bmp stream" << std::endl;
+
     ByteStream datStream;
 
     datStream.mode = bmode_LittleEndian;
@@ -43,11 +49,10 @@ i32 BitmapParse::WriteToFile(std::string src, Bitmap* bmp) {
 
     oStream.mode = bmode_LittleEndian;
 
-    oStream.writeUInt16(BMP_SIG);
-    oStream.writeUInt32(datStream.getSize());
-    oStream.writeUInt16(0);
-    oStream.writeUInt16(0);
-    oStream.writeUInt32(oStream.getSize() + sizeof(u32) + datPos);
+    oStream.writeUInt16(BMP_SIG); //sig
+    oStream.writeUInt32(datStream.getSize()); //how many bytes in file
+    oStream.writeUInt32(0); // reserved
+    oStream.writeUInt32(oStream.getSize() + sizeof(u32) + datPos); //data offset
     oStream.writeBytes(datStream.getBytePtr(), datStream.getSize());
 
     datStream.free();

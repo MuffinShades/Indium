@@ -3,6 +3,7 @@
 #include <cstring>
 #include <cmath>
 #include "msutil.hpp"
+#include "types.hpp"
 
 #ifdef MSFL_DLL
 #ifdef MSFL_EXPORTS
@@ -42,13 +43,13 @@ public:
 
 	//read functions
 	MSFL_EXP virtual byte readByte();
-	MSFL_EXP virtual unsigned long long readBytesAsVal(size_t nBytes);
-	MSFL_EXP virtual short readInt16();
-	MSFL_EXP virtual unsigned short readUInt16();
-	MSFL_EXP virtual int readInt32();
-	MSFL_EXP virtual unsigned int readUInt32();
-	MSFL_EXP virtual int64_t readInt64();
-	MSFL_EXP virtual uint64_t readUInt64();
+	MSFL_EXP virtual u64 readBytesAsVal(size_t nBytes);
+	MSFL_EXP virtual i16 readInt16();
+	MSFL_EXP virtual u16 readUInt16();
+	MSFL_EXP virtual i32 readInt32();
+	MSFL_EXP virtual u32 readUInt32();
+	MSFL_EXP virtual i64 readInt64();
+	MSFL_EXP virtual u64 readUInt64();
 	MSFL_EXP virtual byte* readBytes(size_t nBytes);
 
 	MSFL_EXP byte curByte();
@@ -57,13 +58,13 @@ public:
 
 	//write functions
 	MSFL_EXP virtual void writeByte(byte b);
-	MSFL_EXP virtual void writeNBytesAsVal(unsigned long long v, size_t nBytes);
-	MSFL_EXP virtual void writeInt16(short v);
-	MSFL_EXP virtual void writeUInt16(unsigned short v);
-	MSFL_EXP virtual void writeInt32(int v);
-	MSFL_EXP virtual void writeUInt32(unsigned int v);
-	MSFL_EXP virtual void writeInt64(int64_t v);
-	MSFL_EXP virtual void writeUInt64(uint64_t v);
+	MSFL_EXP virtual void writeNBytesAsVal(u64 v, size_t nBytes);
+	MSFL_EXP virtual void writeInt16(i16 v);
+	MSFL_EXP virtual void writeUInt16(u16 v);
+	MSFL_EXP virtual void writeInt32(i32 v);
+	MSFL_EXP virtual void writeUInt32(u32 v);
+	MSFL_EXP virtual void writeInt64(i64 v);
+	MSFL_EXP virtual void writeUInt64(u64 v);
 	MSFL_EXP virtual void writeBytes(byte* dat, size_t sz);
 	
 	//

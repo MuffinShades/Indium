@@ -161,6 +161,10 @@ void adler32_compute_next(u32& cur, const byte val) {
 #define RLE_L_MASK 0x3
 #define RLE_L_BASE 0x3
 
+struct block_settings {
+    const byte cmf, flg;
+};
+
 u64 bitReverse(u64 v, size_t nBits) {
     u64 rs = 0x00;
     for (i32 i = nBits - 1; i >= 0; i--)
@@ -351,9 +355,10 @@ void BalloonStream::writeValue(u64 val) {
 void BalloonStream::allocNewChunk() {
     this->asz += 0xffff;
     byte* tBytes = new byte[this->asz];
-    memset(tBytes, 0, this->asz);
+    ZeroMem(tBytes, this->asz);
     memcpy(tBytes, this->bytes, this->sz);
-    delete[] this->bytes;
+    if (this->bytes)
+        delete[] this->bytes;
     this->bytes = tBytes;
 }
 
@@ -395,6 +400,20 @@ void BalloonStream::calloc(size_t sz) {
     u32 rBit = 8;
 }
 
+void BalloonStream::detach() {
+    this->bytes = nullptr;
+    this->asz =
+    this->bsz =
+    this->cByte =
+    this->lBit =
+    this->pos = 0;
+}
+
+void BalloonStream::free() {
+    if (this->bytes)
+        delete[] this->bytes;
+    this->detach();
+}
 
 void WriteVBitsToStream(BalloonStream& stream, u64 val, size_t nBits) {
     if (nBits <= 0) return;
@@ -553,7 +572,7 @@ void InsertNode(u32 code, size_t codeLen, u32 val, huffman_node* tree) {
             if (current->right == nullptr)
                 current->right = new huffman_node{
                     .count = 0
-            };
+                };
 
             current = current->right;
         }
@@ -561,7 +580,7 @@ void InsertNode(u32 code, size_t codeLen, u32 val, huffman_node* tree) {
             if (current->left == nullptr)
                 current->left = new huffman_node{
                     .count = 0
-            };
+                };
 
             current = current->left;
         }
@@ -603,7 +622,7 @@ template<size_t alphaSz> huffman_node* GenTreeFromCounts(size_t* counts, i32 max
                 .count = *count,
                 .cmpCount = *count,
                 .leaf = true
-                });
+            });
         else _val++;
 
 
@@ -638,7 +657,7 @@ template<size_t alphaSz> huffman_node* GenTreeFromCounts(size_t* counts, i32 max
  *
  */
 u32* getTreeBitLens(huffman_node* tree, size_t alphabetSize, i32 currentLen = 0, u32* cbl = nullptr) {
-    if (cbl == nullptr) {
+    if (!cbl) {
         cbl = new u32[alphabetSize];
         ZeroMem(cbl, alphabetSize);
     }
@@ -665,12 +684,12 @@ u32* getTreeBitLens(huffman_node* tree, size_t alphabetSize, i32 currentLen = 0,
  * gets the bit lengths counts for a tree uh yeah
  *
  */
-size_t* getBitLenCounts(u32* bitLens, size_t blLen, size_t MAX_BITS) {
+size_t* getBitLenCounts(u32* bitLens, const size_t blLen, const size_t MAX_BITS) {
     size_t* res = new size_t[MAX_BITS + 1];
     ZeroMem(res, MAX_BITS + 1);
 
-    for (i32 i = 0; i < blLen; i++)
-        res[bitLens[i]]++;
+    for (size_t i = 0; i < blLen; i++)
+        res[min(bitLens[i], MAX_BITS)]++;
 
     return res;
 }
@@ -687,7 +706,11 @@ size_t* getBitLenCounts(u32* bitLens, size_t blLen, size_t MAX_BITS) {
  */
 huffman_node* BitLengthsToHTree(u32* bitLens, size_t blLen, size_t aLen) {
     const size_t MAX_BITS = ArrMax<u32>(bitLens, blLen);
+    std::cout << "Max Bits: " << MAX_BITS << " " << blLen << std::endl;
     size_t* blCount = getBitLenCounts(bitLens, blLen, MAX_BITS);
+
+    if (!blCount)
+        return nullptr;
 
     std::vector<i32> nextCode = { 0,0 };
 
@@ -1758,8 +1781,6 @@ i32 WriteDeflateBlockToStream(BalloonStream* stream, bin* block_data, const size
     stream->writeBit((bType & 0b01));
     stream->writeBit((bType & 0b10) >> 1);
 
-    std::cout << "Block Write: " << block_data->sz << std::endl;
-
     //compresss
     switch (level) {
 
@@ -1847,13 +1868,39 @@ balloon_result Balloon::Deflate(byte* data, size_t sz, u32 compressionLevel, con
     BalloonStream rStream = BalloonStream(0xff);
 
     //generate some of the fields
+
+    /*
+    
+    cmf values:
+
+    compression method: 8 (bits 1-4)
+    winBits: 15 -> 7 (bits 5-8)
+    
+    */
+
     byte cmf = (0x08) | (((winBits - 8) & 0b1111) << 4);
-    byte flg = 0; //all the data is just going to be 0
+    /*
+    
+    compression type values (bits 7-8)
+
+    00 - fastest
+    01 - fast
+    10 - default <-
+    11 - max compression
+
+    Dictioanry values (bit 6)
+
+    0 - no <-
+    1 - yes
+    
+    */
+    byte flg = ((2 << 1) | 0); //we use default compression so 0b11 << 1 and no dictionary (0)
 
     //flg = 0x1f - (cmf * 0x100) % 0x1f; //compute the flag checksum
     //better computation of flag check sum
     const byte flgExt = (cmf * 256 + flg) % 31;
-    flg += (31 - flgExt);
+    flg <<= 5; //make room for flag extension
+    flg |= (31 - flgExt);
 
     //write the cmf and flag bytes
     rStream.writeValue(cmf);
@@ -1930,19 +1977,24 @@ huffman_node** _decode_trees(BalloonStream* stream) {
     if (!stream)
         return nullptr;
 
+    std::cout << "Decodign Trees..." << std::endl;
+
     size_t nLitCodes = stream->readNBits(5) + 257,
         nDistCodes = stream->readNBits(5) + 1,
         nClCodes = stream->readNBits(4) + 4;
 
+    std::cout << "Lit: " << nLitCodes << " Dist: " << nDistCodes << " Cl: " << nClCodes << std::endl;
+
     //extract cl bit lengths
-    u32* clBitLens = new u32[nClCodes];
-    ZeroMem(clBitLens, nClCodes);
+    const size_t N_CLCODES = 19;
+    u32* clBitLens = new u32[N_CLCODES];
+    ZeroMem(clBitLens, N_CLCODES);
 
     forrange(nClCodes)
         clBitLens[CodeLengthCodesOrder[i]] = stream->readNBits(3);
 
     //create code length tree
-    huffman_node* clTree = BitLengthsToHTree(clBitLens, nClCodes, nClCodes);
+    huffman_node* clTree = BitLengthsToHTree(clBitLens, N_CLCODES, N_CLCODES);
 
     if (!clTree) {
         std::cout << "Inflate Error, failed to read or create code length tree!" << std::endl;
@@ -2039,7 +2091,7 @@ huffman_node** _decode_trees(BalloonStream* stream) {
     return _tContain;
 }
 
-void _inflate_block_generic(InflateBlock* block, BalloonStream* stream, huffman_node* litTree, huffman_node* distTree) {
+void _inflate_block_generic(InflateBlock* block, BalloonStream* stream, huffman_node* litTree, huffman_node* distTree, const block_settings settings) {
     if (!litTree || !distTree)
         return;
 
@@ -2083,7 +2135,7 @@ void _inflate_block_generic(InflateBlock* block, BalloonStream* stream, huffman_
     memcpy(block->data, dec_data.data(), block->sz);
 }
 
-void _inflate_block_none(InflateBlock* block, BalloonStream* stream) {
+void _inflate_block_none(InflateBlock* block, BalloonStream* stream, const block_settings settings) {
     if (!block || !stream)
         return;
 
@@ -2097,18 +2149,19 @@ void _inflate_block_none(InflateBlock* block, BalloonStream* stream) {
         * b = stream->readByte();
 }
 
-void _inflate_block_static(InflateBlock* block, BalloonStream* stream) {
+void _inflate_block_static(InflateBlock* block, BalloonStream* stream, const block_settings settings) {
     if (!block || !stream)
         return;
 
     u32* bitLens = new u32[DEFAULT_ALPHABET_SIZE];
+    ZeroMem(bitLens, DEFAULT_ALPHABET_SIZE);
     const size_t u3sz = sizeof(u32);
 
-    //copy values to bit length table
-    memset(bitLens, 8u, 144 * u3sz);
-    memset(bitLens + 144, 9u, 112 * u3sz);
-    memset(bitLens + 256, 7u, 24 * u3sz);
-    memset(bitLens + 280, 8u, 8 * u3sz);
+    //copy values to bit length table (use memfill instead of memset since we are setting u32-by-u32 not byte-by-byte
+    memfill(bitLens      , 8u, 144);
+    memfill(bitLens + 144, 9u, 112);
+    memfill(bitLens + 256, 7u, 24);
+    memfill(bitLens + 280, 8u, 8);
 
     //create the literal trwee
     huffman_node* llTree = BitLengthsToHTree(bitLens, DEFAULT_ALPHABET_SIZE, DEFAULT_ALPHABET_SIZE);
@@ -2121,8 +2174,9 @@ void _inflate_block_static(InflateBlock* block, BalloonStream* stream) {
     }
 
     u32* distBitLens = new u32[30];
+    ZeroMem(distBitLens, 30);
 
-    memset(distBitLens, 5u, 30 * u3sz);
+    memfill(distBitLens, 5u, 30);
 
     //create distance tree
     huffman_node* distTree = BitLengthsToHTree(distBitLens, 30, 30);
@@ -2135,13 +2189,13 @@ void _inflate_block_static(InflateBlock* block, BalloonStream* stream) {
     }
 
     //inflate block
-    _inflate_block_generic(block, stream, llTree, distTree);
+    _inflate_block_generic(block, stream, llTree, distTree, settings);
 
     TreeFree(distTree);
     TreeFree(llTree);
 }
 
-void _inflate_block_dynamic(InflateBlock* block, BalloonStream* stream) {
+void _inflate_block_dynamic(InflateBlock* block, BalloonStream* stream, const block_settings settings) {
     if (!block || !stream)
         return;
 
@@ -2152,7 +2206,7 @@ void _inflate_block_dynamic(InflateBlock* block, BalloonStream* stream) {
         return;
     }
 
-    _inflate_block_generic(block, stream, trees[0], trees[1]);
+    _inflate_block_generic(block, stream, trees[0], trees[1], settings);
 
     //memory management
     TreeFree(trees[0]);
@@ -2161,7 +2215,7 @@ void _inflate_block_dynamic(InflateBlock* block, BalloonStream* stream) {
 }
 
 //
-InflateBlock _stream_block_inflate(BalloonStream* stream) {
+InflateBlock _stream_block_inflate(BalloonStream* stream, const block_settings blck_settings) {
     if (!stream)
         return { 0 };
 
@@ -2176,13 +2230,13 @@ InflateBlock _stream_block_inflate(BalloonStream* stream) {
     //decode block data
     switch (block.block_type) {
     case dfb_none:
-        _inflate_block_none(&block, stream);
+        _inflate_block_none(&block, stream, blck_settings);
         break;
     case dfb_static:
-        _inflate_block_static(&block, stream);
+        _inflate_block_static(&block, stream, blck_settings);
         break;
     case dfb_dynamic:
-        _inflate_block_dynamic(&block, stream);
+        _inflate_block_dynamic(&block, stream, blck_settings);
         break;
     }
 
@@ -2233,8 +2287,13 @@ balloon_result Balloon::Inflate(byte* data, size_t sz) {
 
     std::vector<InflateBlock> blocks;
 
+    const block_settings _blck_set = {
+        .cmf = cmf,
+        .flg = flg
+    };
+
     while (!eos) {
-        InflateBlock c_block = _stream_block_inflate(&datStream);
+        InflateBlock c_block = _stream_block_inflate(&datStream, _blck_set);
         totalBlockSize += c_block.sz;
         blocks.push_back(c_block);
         eos = c_block.blockFinal;
@@ -2253,11 +2312,14 @@ balloon_result Balloon::Inflate(byte* data, size_t sz) {
         memcpy(curChunk, block.data, block.sz);
         curChunk += block.sz;
         _safe_free_a(block.data);
+        block.sz = 0;
 
         //check to make sure we don't read anything invalid
         if (curChunk > datEnd)
             break;
     }
+
+    datStream.free();
 
     return res;
 }
