@@ -2219,6 +2219,8 @@ InflateBlock _stream_block_inflate(BalloonStream* stream, const block_settings b
     if (!stream)
         return { 0 };
 
+    std::cout << "Decoding Block" << std::endl;
+
     //basic block creationg and get settings
     InflateBlock block = {
         .data = nullptr,
@@ -2226,6 +2228,8 @@ InflateBlock _stream_block_inflate(BalloonStream* stream, const block_settings b
         .blockFinal = (bool)stream->readBit(),
         .block_type = (deflate_block_type)stream->readNBits(2)
     };
+
+    std::cout << "Block Inf: " << block.blockFinal << " " << block.block_type << std::endl;
 
     //decode block data
     switch (block.block_type) {
@@ -2250,6 +2254,9 @@ balloon_result Balloon::Inflate(byte* data, size_t sz) {
 
     //create a simple stream
     BalloonStream datStream = BalloonStream(data, sz);
+
+    std::cout << "sz: " << sz << std::endl;
+    std::cout << datStream.sz << std::endl;
 
     byte cmf = datStream.readByte();
     byte flg = datStream.readByte();

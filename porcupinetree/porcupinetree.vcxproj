@@ -143,6 +143,7 @@
     <ClInclude Include="bitmapRender.hpp" />
     <ClInclude Include="bitstream.hpp" />
     <ClInclude Include="bytestream.hpp" />
+    <ClInclude Include="crc.hpp" />
     <ClInclude Include="Date.hpp" />
     <ClInclude Include="error.hpp" />
     <ClInclude Include="FilePath.hpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="mp4.hpp" />
     <ClInclude Include="msutil.hpp" />
     <ClInclude Include="nal.hpp" />
+    <ClInclude Include="picture.hpp" />
     <ClInclude Include="png.hpp" />
     <ClInclude Include="realigned_buffer.hpp" />
     <ClInclude Include="sha.hpp" />
@@ -175,6 +177,7 @@
     <ClCompile Include="bitmapRender.cpp" />
     <ClCompile Include="bitstream.cpp" />
     <ClCompile Include="bytestream.cpp" />
+    <ClCompile Include="crc.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="error.cpp" />
     <ClCompile Include="FilePath.cpp" />
@@ -182,11 +185,13 @@
     <ClCompile Include="filewrite.cpp" />
     <ClCompile Include="h264.cpp" />
     <ClCompile Include="jparse.cpp" />
+    <ClCompile Include="jpeg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mov.cpp" />
     <ClCompile Include="mp3.cpp" />
     <ClCompile Include="mp4.cpp" />
     <ClCompile Include="nal.cpp" />
+    <ClCompile Include="picture.cpp" />
     <ClCompile Include="png.cpp" />
     <ClCompile Include="sha.cpp" />
     <ClCompile Include="ttf.cpp" />

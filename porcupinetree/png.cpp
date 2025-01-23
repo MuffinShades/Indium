@@ -25,14 +25,6 @@ struct png_chunk {
 	bool good = false;
 };
 
-enum Png_ColorSpace {
-	Png_Color_GrayScale = 0,
-	Png_Color_RGB = 2,
-	Png_Color_Indexed = 3,
-	Png_Color_GrayScale_Alpha = 4,
-	Png_Color_RGBA = 6
-};
-
 struct _IDAT {
 	byte* dat;
 	size_t sz;
@@ -69,14 +61,13 @@ chunk_type int_to_cType(int ty) {
 
 //read chunk
 png_chunk readNextChunk(ByteStream* stream) {
-	std::cout << "Reading Next Chunk..." << std::endl;
 	png_chunk res = {
 		.len = stream->readUInt32()
 	};
 	i32 iTy = stream->readUInt32();
 	res.type = int_to_cType(iTy);
 
-	std::cout << "Chunk Read: " << res.type << " " << res.len << std::endl;
+	//std::cout << "Chunk Read: " << res.type << " " << res.len << std::endl;
 
 	if (res.len > 0)
 		res.dat = new byte[res.len];
@@ -98,11 +89,10 @@ png_chunk readNextChunk(ByteStream* stream) {
 #include "binary_dump.hpp"
 
 _IDAT ProcessIDAT(png_chunk c) {
-	std::cout << "Idat decode!" << std::endl;
 	//inflate everything
 	BinDump::dump(c.dat, c.len);
 	balloon_result decompressed_dat = Balloon::Inflate(c.dat, c.len);
-	std::cout << "Decompress end!" << std::endl;
+	
 	return {
 		.dat = decompressed_dat.data,
 		.sz = decompressed_dat.sz
@@ -163,10 +153,14 @@ struct defilter_inst {
 
 //helper function(s) for defilter inst
 byte defilter_inst_next(defilter_inst* inst) {
+	if (inst->stream + inst->p >= inst->end)
+		return 0;
 	return inst->stream[inst->p++];
 }
 
 byte defilter_inst_cur(defilter_inst* inst) {
+	if (inst->stream + inst->p >= inst->end)
+		return 0;
 	return inst->stream[inst->p];
 }
 
@@ -310,7 +304,7 @@ byte* defilterDat(byte* i_dat, const size_t datSz, _IHDR *hdr) {
 	//y scan
 	for (; df_inst.scanY < hdr->h; df_inst.scanY++) {
 		byte method = defilter_inst_next(&df_inst); //get defilter method
-		std::cout << "Scan Y: " << df_inst.scanY << " / " << hdr->h << " | Method: " << (i32)method << " Bytes Per Pixel: " << hdr->bytesPerPixel << std::endl;
+		std::cout << "Scan: " << df_inst.scanY << " / " << hdr->h << " " << (i32)method << std::endl;
 		//x scan
 		for (df_inst.scanX = 0; df_inst.scanX < hdr->w * hdr->bytesPerPixel; df_inst.scanX++) {
 			switch (method) {
@@ -336,7 +330,6 @@ byte* defilterDat(byte* i_dat, const size_t datSz, _IHDR *hdr) {
 				DefilterMethod::paeth(&df_inst);
 				break;
 			default:
-				std::cout << "Error invalid filter method! " << (i32) method << std::endl;
 				df_inst.p += df_inst.bytesPerScan;
 				df_inst.scanY++;
 				df_inst.scanX = 0;
@@ -349,7 +342,8 @@ byte* defilterDat(byte* i_dat, const size_t datSz, _IHDR *hdr) {
 
 	if (i_dat)
 		delete[] i_dat;
-	return defilterCleanUp(out, osz, hdr);
+	//return defilterCleanUp(out, osz, hdr);
+	return out;
 };
 
 //decode a file
@@ -369,17 +363,13 @@ png_file PngParse::Decode(std::string src) {
 
 //to free png chunk
 void free_png_chunk(png_chunk* p) {
-	std::cout << "Png chunk free start! " << " " << p->len << std::endl;
 	if (p && p->dat) {
-		std::cout << "A" << std::endl;
 		delete[] p->dat;
 		p->dat = nullptr;
-		std::cout << "b" << std::endl;
 		p->len = 0;
 		p->checksum = 0;
 		p->type = NULL_CHUNK;
 	}
-	std::cout << "png chunk free end!" << std::endl;
 };
 
 #define MSFL_PNG_DEBUG
@@ -415,13 +405,9 @@ png_file PngParse::DecodeBytes(byte* bytes, size_t sz) {
 
 	free_png_chunk(&headChunk);
 
-	//construct out buffer
-	const size_t decodeDatSz = png_header.w * png_header.h * png_header.bytesPerPixel + png_header.h; // add png_header.h for the defilter addition stuff
-	byte* imgDat = new byte[decodeDatSz];
-	ZeroMem(imgDat, decodeDatSz);
-	size_t iDPos = 0;
-
-	//parse idat chunks
+	//parse other chunks till first IDat chunk
+	bool idat_found = false;
+	png_chunk Idat1;
 	for (;;) {
 		png_chunk dat = readNextChunk(&stream);
 
@@ -431,18 +417,8 @@ png_file PngParse::DecodeBytes(byte* bytes, size_t sz) {
 			break;
 		}
 		case IDAT: {
-			//process idat chunk
-			_IDAT i_dat = ProcessIDAT(dat);
-
-			//make sure not to copy too much data
-			if (iDPos >= decodeDatSz)
-				break;
-
-			//copy
-			memcpy(imgDat + iDPos, i_dat.dat, i_dat.sz);
-			iDPos += i_dat.sz;
-
-			_safe_free_a(i_dat.dat);
+			idat_found = true;
+			Idat1 = dat;
 			break;
 		}
 		default: {
@@ -452,14 +428,79 @@ png_file PngParse::DecodeBytes(byte* bytes, size_t sz) {
 		}
 		}
 
+		if (idat_found)
+			break;
+
 		if (dat.type != NULL_CHUNK)
 			free_png_chunk(&dat);
 
 		if (stream.tell() >= stream.getSize() || dat.type == IEND) break;
 	}
 
+	//collect all the idat chunks
+	byte* compressedIdata = nullptr; size_t compressedIdataSz = Idat1.len;
+
+	std::vector<png_chunk> iData = { Idat1 };
+
+	png_chunk curIdata = iData[0];
+
+	bool extraChunks = true;
+
+	for (;;) {
+		curIdata = readNextChunk(&stream);
+
+		switch (curIdata.type) {
+		case IDAT:
+			iData.push_back(curIdata);
+			compressedIdataSz += curIdata.len;
+			std::cout << "I data sz: " << curIdata.len << std::endl;
+			break;
+		case IEND:
+			extraChunks = false;
+			break;
+		}
+
+		if (curIdata.type == IEND || curIdata.type != IDAT) {
+			free_png_chunk(&curIdata);
+			break;
+		}
+	}
+
+	//allocate and stitch togethera all i chunks
+	//TODO: fix the concatination between blocks :3 also pix paeth
+	compressedIdata = new byte[compressedIdataSz];
+	ZeroMem(compressedIdata, compressedIdataSz);
+	size_t curCopy = 0;
+
+	for (const png_chunk& idatChunk : iData) {
+		size_t chunkLen;
+		std::cout << "IDAT Copy: " << curCopy << std::endl;
+		memcpy(compressedIdata + curCopy, idatChunk.dat, chunkLen = idatChunk.len);
+		free_png_chunk(const_cast<png_chunk*>(&idatChunk));
+
+		if ((curCopy += chunkLen) >= compressedIdataSz)
+			break;
+	}
+	
+	//decompress all the idata chunks
+	size_t decodeDatSz = png_header.w * png_header.h * png_header.bytesPerPixel + png_header.h; // add png_header.h for the defilter addition stuff
+	std::cout << "Expected Size: " << decodeDatSz << std::endl;
+	byte* imgDat;
+	size_t iDPos = 0;
+	
+	balloon_result rawImgData = Balloon::Inflate(compressedIdata, compressedIdataSz);
+	_safe_free_a(compressedIdata);
+	imgDat = rawImgData.data;
+	decodeDatSz = rawImgData.sz;
+	std::cout << "Actual Size: " << decodeDatSz << std::endl;
+
+	//TODO: decode additional (non required) chunks
+	if (extraChunks) {
+
+	}
+
 	//defilter the data
-	std::cout << "Defilter start!" << std::endl;
+	std::cout << "Defiltering..." << std::endl;
 	imgDat = defilterDat(imgDat, decodeDatSz, &png_header);
 
 	//for testing just write data to a bitmap
@@ -474,9 +515,30 @@ png_file PngParse::DecodeBytes(byte* bytes, size_t sz) {
 	return {
 		.data = imgDat,
 		.sz = png_header.w * png_header.h * png_header.bytesPerPixel,
-		.width = (i32) png_header.w,
-		.height = (i32) png_header.h,
+		.width = png_header.w,
+		.height = png_header.h,
 		.channels = (i32) png_header.nChannels,
-		.src = ""
+		.colorMode = png_header.colorSpace,
+		.bitDepth = png_header.bitDepth
 	};
+}
+
+bool PngParse::Encode(std::string src, png_file p) {
+	if (src.length() <= 0 || src == "" || p.sz <= 0 || !p.data)
+		return false;
+
+	if (p.colorMode == Png_Color_Indexed) {
+		std::cout << "Error! Png color indexing not supported yet!" << std::endl;
+		return false;
+	}
+
+	/*_IHDR hdr = {
+		.w = p.width,
+		.h = p.height,
+		.bitDepth = p.bitDepth,
+		.colorSpace = p.colorMode,
+		.compressionMethod = h_stream.readByte(),
+		.filterType = h_stream.readByte(),
+		.interlaced = (bool)(h_stream.readByte() & 1)
+	};*/
 }

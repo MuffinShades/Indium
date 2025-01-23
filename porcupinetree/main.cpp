@@ -28,7 +28,7 @@ i32 main(void) {
 	mp3_audio test_mp3 = mp3::fileDecode("C:\\mpegtest\\audio2.mp3");
 
 	//png testing
-	png_file png_decode = PngParse::Decode("C:\\mpegtest\\png_test.png");
+	png_file png_decode = PngParse::Decode("C:\\mpegtest\\unnamed.png");
 
 	return 0;
 }

@@ -5,18 +5,27 @@
 #include "balloon.hpp"
 #include "ByteStream.hpp"
 
+enum Png_ColorSpace {
+	Png_Color_GrayScale = 0,
+	Png_Color_RGB = 2,
+	Png_Color_Indexed = 3,
+	Png_Color_GrayScale_Alpha = 4,
+	Png_Color_RGBA = 6
+};
+
 struct png_file {
 	byte* data;
 	size_t sz;
-	int width = 0;
-	int height = 0;
-	int channels = 0;
-	std::string src;
+	size_t width = 0;
+	size_t height = 0;
+	i32 channels = 0;
+	Png_ColorSpace colorMode;
+	i32 bitDepth;
 };
 
 class PngParse {
 public:
 	static png_file Decode(std::string src);
 	static png_file DecodeBytes(byte* bytes, size_t sz);
-	static bool Encode(png_file p);
+	static bool Encode(std::string src, png_file p);
 };

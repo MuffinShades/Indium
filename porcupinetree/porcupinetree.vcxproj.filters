@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\zlib">
-      <UniqueIdentifier>{bdd95e98-a4d9-47e4-8ff1-28a4f62ee491}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\mpeg">
       <UniqueIdentifier>{5cd33b2c-004a-4496-9e8a-2214b9fac166}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\zlib">
-      <UniqueIdentifier>{6f9004a2-1fb9-4db4-a754-a044e8ac76f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\mpeg">
       <UniqueIdentifier>{2a91300c-22c5-4e42-a44e-280edbebdda9}</UniqueIdentifier>
@@ -73,6 +67,12 @@
     <Filter Include="Source Files\encryption">
       <UniqueIdentifier>{4307daf6-646f-4160-a6fd-0d8eca673bdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\compress">
+      <UniqueIdentifier>{6f9004a2-1fb9-4db4-a754-a044e8ac76f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\compress">
+      <UniqueIdentifier>{bdd95e98-a4d9-47e4-8ff1-28a4f62ee491}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="types.hpp">
@@ -82,7 +82,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="balloon.hpp">
-      <Filter>Header Files\zlib</Filter>
+      <Filter>Header Files\compress</Filter>
     </ClInclude>
     <ClInclude Include="h264.hpp">
       <Filter>Header Files\mpeg</Filter>
@@ -100,13 +100,13 @@
       <Filter>Header Files\mpeg</Filter>
     </ClInclude>
     <ClInclude Include="linked_map.hpp">
-      <Filter>Header Files\zlib</Filter>
+      <Filter>Header Files\compress</Filter>
     </ClInclude>
     <ClInclude Include="micro_vector.h">
-      <Filter>Header Files\zlib</Filter>
+      <Filter>Header Files\compress</Filter>
     </ClInclude>
     <ClInclude Include="realigned_buffer.hpp">
-      <Filter>Header Files\zlib</Filter>
+      <Filter>Header Files\compress</Filter>
     </ClInclude>
     <ClInclude Include="bitstream.hpp">
       <Filter>Header Files\stream</Filter>
@@ -165,13 +165,19 @@
     <ClInclude Include="sha.hpp">
       <Filter>Header Files\encryption</Filter>
     </ClInclude>
+    <ClInclude Include="crc.hpp">
+      <Filter>Header Files\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="picture.hpp">
+      <Filter>Header Files\img</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="balloon.cpp">
-      <Filter>Source Files\zlib</Filter>
+      <Filter>Source Files\compress</Filter>
     </ClCompile>
     <ClCompile Include="h264.cpp">
       <Filter>Source Files\mpeg</Filter>
@@ -241,6 +247,15 @@
     </ClCompile>
     <ClCompile Include="sha.cpp">
       <Filter>Source Files\encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="crc.cpp">
+      <Filter>Source Files\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="picture.cpp">
+      <Filter>Source Files\img</Filter>
+    </ClCompile>
+    <ClCompile Include="jpeg.cpp">
+      <Filter>Source Files\img</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

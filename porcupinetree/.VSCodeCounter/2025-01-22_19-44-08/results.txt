@@ -1,0 +1,91 @@
+Date : 2025-01-22 19:44:08
+Directory : c:\Users\chris\source\repos\porcupinetree\porcupinetree
+Total : 61 files,  6765 codes, 1507 comments, 1707 blanks, all 9979 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C++      |         58 |      6,548 |      1,507 |      1,703 |      9,758 |
+| XML      |          1 |        202 |          0 |          0 |        202 |
+| Log      |          2 |         15 |          0 |          4 |         19 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                  | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                     |         61 |      6,765 |      1,507 |      1,707 |      9,979 |
+| . (Files)                                                                             |         59 |      6,750 |      1,507 |      1,703 |      9,960 |
+| x64                                                                                   |          2 |         15 |          0 |          4 |         19 |
+| x64\Debug                                                                             |          1 |          5 |          0 |          2 |          7 |
+| x64\Release                                                                           |          1 |         10 |          0 |          2 |         12 |
++---------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                              | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\Date.cpp                      | C++      |        140 |         36 |         26 |        202 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\Date.hpp                      | C++      |         37 |          0 |          4 |         41 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\FilePath.cpp                  | C++      |         51 |          5 |         25 |         81 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\FilePath.hpp                  | C++      |         41 |          5 |          9 |         55 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\FileStream.cpp                | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\FileStream.hpp                | C++      |          1 |          0 |          0 |          1 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\ID3.hpp                       | C++      |         38 |         13 |         14 |         65 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\aes.cpp                       | C++      |          1 |          0 |          0 |          1 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\aes.hpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\asset.cpp                     | C++      |        790 |        205 |        245 |      1,240 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\asset.hpp                     | C++      |        131 |         15 |         13 |        159 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\balloon.cpp                   | C++      |      1,389 |        583 |        432 |      2,404 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\balloon.hpp                   | C++      |         78 |         41 |          8 |        127 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\binary_dump.cpp               | C++      |          9 |          0 |          4 |         13 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\binary_dump.hpp               | C++      |         10 |          0 |          2 |         12 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitmap.cpp                    | C++      |         70 |          2 |         26 |         98 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitmap.hpp                    | C++      |         45 |          0 |          7 |         52 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitmapRender.cpp              | C++      |         53 |          2 |         13 |         68 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitmapRender.hpp              | C++      |         34 |          9 |          6 |         49 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitstream.cpp                 | C++      |        186 |         46 |         60 |        292 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bitstream.hpp                 | C++      |         68 |          4 |         21 |         93 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bytestream.cpp                | C++      |        231 |          5 |         55 |        291 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\bytestream.hpp                | C++      |         88 |          3 |         12 |        103 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\crc.cpp                       | C++      |         10 |          0 |          4 |         14 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\crc.hpp                       | C++      |         57 |          0 |          2 |         59 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\error.cpp                     | C++      |          2 |          0 |          1 |          3 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\error.hpp                     | C++      |          1 |          0 |          0 |          1 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\filewrite.cpp                 | C++      |         27 |          7 |         14 |         48 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\filewrite.hpp                 | C++      |         32 |          0 |          5 |         37 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\h264.cpp                      | C++      |          2 |          0 |          2 |          4 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\h264.hpp                      | C++      |          8 |          0 |          3 |         11 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\jparse.cpp                    | C++      |        466 |         75 |         87 |        628 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\jparse.hpp                    | C++      |         71 |          4 |         12 |         87 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\jpg.hpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\linked_map.hpp                | C++      |         84 |         49 |         18 |        151 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\main.cpp                      | C++      |         15 |         11 |         10 |         36 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\micro_vector.h                | C++      |         55 |         16 |         12 |         83 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mov.cpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mov.hpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mp3.cpp                       | C++      |        143 |         16 |         55 |        214 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mp3.hpp                       | C++      |         56 |          0 |          9 |         65 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mp4.cpp                       | C++      |          1 |          0 |          0 |          1 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\mp4.hpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\msutil.hpp                    | C++      |        186 |         21 |         47 |        254 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\nal.cpp                       | C++      |         36 |          5 |          8 |         49 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\nal.hpp                       | C++      |         13 |          7 |          2 |         22 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\png.cpp                       | C++      |        362 |         43 |         77 |        482 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\png.hpp                       | C++      |         28 |          0 |          3 |         31 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\porcupinetree.vcxproj         | XML      |        202 |          0 |          0 |        202 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\realigned_buffer.hpp          | C++      |         31 |         16 |          9 |         56 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\sha.cpp                       | C++      |          1 |          0 |          0 |          1 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\sha.hpp                       | C++      |          1 |          0 |          1 |          2 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\ttf.cpp                       | C++      |        290 |        107 |         88 |        485 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\ttf.hpp                       | C++      |        113 |         10 |         15 |        138 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\ttfRender.cpp                 | C++      |        235 |         66 |         70 |        371 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\ttfRender.hpp                 | C++      |         26 |          0 |          4 |         30 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\types.hpp                     | C++      |         15 |          3 |          7 |         25 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\x64\Debug\porcupinetree.log   | Log      |          5 |          0 |          2 |          7 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\x64\Release\porcupinetree.log | Log      |         10 |          0 |          2 |         12 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\xml.cpp                       | C++      |        585 |         69 |        134 |        788 |
+| c:\Users\chris\source\repos\porcupinetree\porcupinetree\xml.hpp                       | C++      |         99 |          8 |         16 |        123 |
+| Total                                                                                 |          |      6,765 |      1,507 |      1,707 |      9,979 |
++---------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
