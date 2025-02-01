@@ -142,7 +142,9 @@
     <ClInclude Include="bitmap.hpp" />
     <ClInclude Include="bitmapRender.hpp" />
     <ClInclude Include="bitstream.hpp" />
-    <ClInclude Include="bytestream.hpp" />
+    <ClInclude Include="ByteStream.hpp" />
+    <ClInclude Include="bytestream_OLD.hpp" />
+    <ClInclude Include="Context.hpp" />
     <ClInclude Include="crc.hpp" />
     <ClInclude Include="Date.hpp" />
     <ClInclude Include="error.hpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="jparse.hpp" />
     <ClInclude Include="jpg.hpp" />
     <ClInclude Include="linked_map.hpp" />
+    <ClInclude Include="memcpy.hpp" />
     <ClInclude Include="micro_vector.h" />
     <ClInclude Include="mov.hpp" />
     <ClInclude Include="mp3.hpp" />
@@ -176,7 +179,8 @@
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="bitmapRender.cpp" />
     <ClCompile Include="bitstream.cpp" />
-    <ClCompile Include="bytestream.cpp" />
+    <ClCompile Include="ByteStream.cpp" />
+    <ClCompile Include="bytestream_OLD.cpp" />
     <ClCompile Include="crc.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="error.cpp" />

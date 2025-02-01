@@ -73,6 +73,9 @@
     <Filter Include="Header Files\compress">
       <UniqueIdentifier>{bdd95e98-a4d9-47e4-8ff1-28a4f62ee491}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\memory">
+      <UniqueIdentifier>{e586f03c-2d0d-4afa-b36a-1b062286ca9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="types.hpp">
@@ -111,7 +114,7 @@
     <ClInclude Include="bitstream.hpp">
       <Filter>Header Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="bytestream.hpp">
+    <ClInclude Include="bytestream_OLD.hpp">
       <Filter>Header Files\stream</Filter>
     </ClInclude>
     <ClInclude Include="FileStream.hpp">
@@ -171,6 +174,15 @@
     <ClInclude Include="picture.hpp">
       <Filter>Header Files\img</Filter>
     </ClInclude>
+    <ClInclude Include="ByteStream.hpp">
+      <Filter>Header Files\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="memcpy.hpp">
+      <Filter>Header Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -197,7 +209,7 @@
     <ClCompile Include="bitstream.cpp">
       <Filter>Source Files\stream</Filter>
     </ClCompile>
-    <ClCompile Include="bytestream.cpp">
+    <ClCompile Include="bytestream_OLD.cpp">
       <Filter>Source Files\stream</Filter>
     </ClCompile>
     <ClCompile Include="FileStream.cpp">
@@ -256,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="jpeg.cpp">
       <Filter>Source Files\img</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteStream.cpp">
+      <Filter>Source Files\stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

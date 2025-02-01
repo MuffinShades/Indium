@@ -252,3 +252,19 @@ template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
 #define fast_mod16(val) modBase2(val, 4)
 #define fast_mod32(val) modBase2(val, 5)
 #define fast_mod64(val) modBase2(val, 6)
+
+//faster log functions that are also aligned for certain bases
+#define __log_def(align) {\
+    i32 c = 0;\
+    \
+    while (val >>= align)\
+        c++;\
+    \
+    return c;\
+}
+static i32 fast_log2(i32 val) __log_def(1)
+static i32 fast_log4(i32 val) __log_def(2)
+static i32 fast_log8(i32 val) __log_def(3)
+static i32 fast_log16(i32 val) __log_def(4)
+static i32 fast_log32(i32 val) __log_def(5)
+static i32 fast_log64(i32 val) __log_def(6)

@@ -478,7 +478,9 @@ png_file PngParse::DecodeBytes(byte* bytes, size_t sz) {
 		memcpy(compressedIdata + curCopy, idatChunk.dat, chunkLen = idatChunk.len);
 		free_png_chunk(const_cast<png_chunk*>(&idatChunk));
 
-		if ((curCopy += chunkLen) >= compressedIdataSz)
+		curCopy += chunkLen;
+
+		if (curCopy >= compressedIdataSz)
 			break;
 	}
 	
