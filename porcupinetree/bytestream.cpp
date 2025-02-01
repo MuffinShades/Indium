@@ -1,4 +1,4 @@
-#include "Bytestream.hpp"
+#include "bytestream.hpp"
 #include "msutil.hpp"
 
 void free_block(mem_block* block) {
@@ -135,9 +135,6 @@ void ByteStream::block_adv() {
 }
 
 void ByteStream::pos_adv() {
-#ifdef BYTESTREAM_ALIGNED_16
-
-#else
 	if (++this->pos >= this->len) {
 		this->len++;
 		if (this->len > this->allocSz)
@@ -148,6 +145,34 @@ void ByteStream::pos_adv() {
 		this->block_adv();
 	else
 		this->cur++;
+}
+
+void ByteStream::WriteBytes(byte *dat, size_t sz) {
+	if (!dat || sz <= 0)
+		return;
+#ifdef BYTESTREAM_ALIGNED_16
+	
+#else
+	size_t blockBytesLeft;
+	if (sz < (blockBytesLeft = (this->cur_block->sz - this->blockPos))) {
+		memcpy(this->cur_block->dat + this->blockPos, dat, sz);
+		this->blockPos += sz;
+	} else {
+		size_t p;
+		this->pos += sz;
+		memcpy(this->cur_block->dat + this->blockPos, dat, p=blockBytesLeft);
+		sz -= blockBytesLeft;
+
+		while (sz > this->blockAllocSz) {
+			this->add_new_block(dat+p, this->blockAllocSz);
+			p += this->blockAllocSz;
+		}
+
+		//copy left over bytes
+		this->block_adv();
+		memcpy(this->cur_block->dat, dat+p, sz);
+		this->blockPos = sz;
+	}
 #endif
 }
 

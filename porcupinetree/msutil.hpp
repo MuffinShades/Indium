@@ -268,3 +268,49 @@ static i32 fast_log8(i32 val) __log_def(3)
 static i32 fast_log16(i32 val) __log_def(4)
 static i32 fast_log32(i32 val) __log_def(5)
 static i32 fast_log64(i32 val) __log_def(6)
+
+
+//memcpys
+//normal -> will align copySz before copying data
+//fast -> assumes copy size is already aligned, also doesnt do same pointer safety checks (faster but can be more dangerous)
+
+#define _a_memcpy_fast_template(type, typeSz) {\
+    const type* s = (const type*) src;         \
+    type *d = (type*) dest;                    \
+                                               \
+    i64 bytesLeft = copySz;                    \
+                                               \
+    if (bytesLeft < 0)                         \
+        return;                                \
+                                               \
+    while (bytesLeft > typeSz) {               \
+        *d++ = *s++;                           \
+        bytesLeft -= typeSz;                   \
+    }                                          \
+}
+
+static void a_memcpy16_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u16, 2)
+static void a_memcpy32_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u32, 4)
+static void a_memcpy64_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u64, 8)
+
+static void a_memcpy16(void *src, void *dest, const size_t copySz) {
+    if (!src || !dest || copySz <= 0)
+        return;
+
+    size_t toAlign = fast_log16(copySz);
+
+    if (toAlign > copySz) {
+        memcpy(dest, src, copySz);
+        return;
+    }
+
+    //align
+    char *d = (char*) dest;
+    const char* s = (const char*) src;
+
+    while (toAlign--)
+        *d++ = *s++;
+
+    //bulk copy
+
+}
