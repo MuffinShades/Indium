@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "moop",
+					"name" : "indium",
 					"targetIndexes" : 
 					[
 						0
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "indium::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-indium-Debug-eb8bcb1a539fc24c6f70.json",
+					"jsonFile" : "target-indium-Debug-6dad5786da6bc3b4dd22.json",
 					"name" : "indium",
 					"projectIndex" : 0
 				}

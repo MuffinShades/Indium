@@ -254,14 +254,15 @@ template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
 #define fast_mod64(val) modBase2(val, 6)
 
 //faster log functions that are also aligned for certain bases
-#define __log_def(align) {\
-    i32 c = 0;\
-    \
-    while (val >>= align)\
-        c++;\
-    \
-    return c;\
+#define __log_def(align) {  \
+    i32 c = 0;              \
+                            \
+    while (val >>= align)   \
+        c++;                \
+                            \
+    return c;               \
 }
+
 static i32 fast_log2(i32 val) __log_def(1)
 static i32 fast_log4(i32 val) __log_def(2)
 static i32 fast_log8(i32 val) __log_def(3)
@@ -293,24 +294,31 @@ static void a_memcpy16_fast(void *src, void *dest, const size_t copySz) _a_memcp
 static void a_memcpy32_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u32, 4)
 static void a_memcpy64_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u64, 8)
 
-static void a_memcpy16(void *src, void *dest, const size_t copySz) {
-    if (!src || !dest || copySz <= 0)
-        return;
-
-    size_t toAlign = fast_log16(copySz);
-
-    if (toAlign > copySz) {
-        memcpy(dest, src, copySz);
-        return;
-    }
-
-    //align
-    char *d = (char*) dest;
-    const char* s = (const char*) src;
-
-    while (toAlign--)
-        *d++ = *s++;
-
-    //bulk copy
-
+#define _a_memcpy_template(cpyFn, logFn) {      \
+    if (!src || !dest || copySz <= 0)           \
+        return;                                 \
+                                                \
+    const size_t toAlign = logFn(copySz);       \
+    size_t t = toAlign;                         \
+                                                \
+    if (toAlign > copySz) {                     \
+        memcpy(dest, src, copySz);              \
+        return;                                 \
+    }                                           \
+                                                \
+    /* align */                                 \
+    char *d = (char*) dest;                     \
+    const char* s = (const char*) src;          \
+                                                \
+    while (t--)                                 \
+        *d++ = *s++;                            \
+                                                \
+    size_t aCopy = copySz - toAlign;            \
+                                                \
+    /* bulk copy */                             \
+    cpyFn((char*)s, d, aCopy);                  \
 }
+
+static void a_memcpy16(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy16_fast, fast_log16)
+static void a_memcpy32(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy32_fast, fast_log32)
+static void a_memcpy64(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy64_fast, fast_log64)

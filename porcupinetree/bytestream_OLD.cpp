@@ -1,5 +1,7 @@
 #include <pch.h>
 
+#ifdef ________asdf
+
 #include "ByteStream.hpp"
 
 constexpr size_t __glb_sz_short = 2;
@@ -289,3 +291,5 @@ void ByteStream::catchUp() {
 }
 
 //welp
+
+#endif

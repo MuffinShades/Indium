@@ -147,11 +147,11 @@ void ByteStream::pos_adv() {
 		this->cur++;
 }
 
-void ByteStream::WriteBytes(byte *dat, size_t sz) {
+void ByteStream::writeBytes(byte *dat, size_t sz) {
 	if (!dat || sz <= 0)
 		return;
 #ifdef BYTESTREAM_ALIGNED_16
-	
+
 #else
 	size_t blockBytesLeft;
 	if (sz < (blockBytesLeft = (this->cur_block->sz - this->blockPos))) {
@@ -176,7 +176,7 @@ void ByteStream::WriteBytes(byte *dat, size_t sz) {
 #endif
 }
 
-void ByteStream::WriteByte(byte b) {
+void ByteStream::writeByte(byte b) {
 	this->pos_adv();
 	*this->cur = b;
 }

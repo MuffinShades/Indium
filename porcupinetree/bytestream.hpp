@@ -54,37 +54,37 @@ public:
 	MSFL_EXP ByteStream();
 
 	//write functions
-	MSFL_EXP virtual void WriteBytes(byte* dat, size_t sz);
-	MSFL_EXP virtual void WriteInt(i64 val, size_t nBytes = 4);
-	MSFL_EXP virtual void WriteUInt(i64 val, size_t nBytes = 4);
-	MSFL_EXP virtual void WriteByte(byte b);
-	MSFL_EXP virtual void WriteInt16(i16 b);
-	MSFL_EXP virtual void WriteUInt16(u16 b);
-	MSFL_EXP virtual void WriteInt24(i24 b);
-	MSFL_EXP virtual void WriteUInt24(u24 b);
-	MSFL_EXP virtual void WriteInt32(i32 b);
-	MSFL_EXP virtual void WriteUInt32(u32 b);
-	MSFL_EXP virtual void WriteInt48(i48 b);
-	MSFL_EXP virtual void WriteUInt48(u48 b);
-	MSFL_EXP virtual void WriteInt64(i64 b);
-	MSFL_EXP virtual void WriteUInt64(u64 b);
-	MSFL_EXP virtual void MultiWrite(u64 val, size_t valSz, size_t nCopy);
+	MSFL_EXP virtual void writeBytes(byte* dat, size_t sz);
+	MSFL_EXP virtual void writeInt(i64 val, size_t nBytes = 4);
+	MSFL_EXP virtual void writeUInt(i64 val, size_t nBytes = 4);
+	MSFL_EXP virtual void writeByte(byte b);
+	MSFL_EXP virtual void writeInt16(i16 b);
+	MSFL_EXP virtual void writeUInt16(u16 b);
+	MSFL_EXP virtual void writeInt24(i24 b);
+	MSFL_EXP virtual void writeUInt24(u24 b);
+	MSFL_EXP virtual void writeInt32(i32 b);
+	MSFL_EXP virtual void writeUInt32(u32 b);
+	MSFL_EXP virtual void writeInt48(i48 b);
+	MSFL_EXP virtual void writeUInt48(u48 b);
+	MSFL_EXP virtual void writeInt64(i64 b);
+	MSFL_EXP virtual void writeUInt64(u64 b);
+	MSFL_EXP virtual void multiWrite(u64 val, size_t valSz, size_t nCopy);
 
 	//read functions
-	MSFL_EXP virtual byte* ReadBytes(size_t sz);
-	MSFL_EXP virtual i64 ReadInt(size_t nBytes);
-	MSFL_EXP virtual u64 ReadUInt(size_t nBytes);
-	MSFL_EXP virtual byte ReadByte();
-	MSFL_EXP virtual i16 ReadInt16();
-	MSFL_EXP virtual u16 ReadUInt16();
-	MSFL_EXP virtual i24 ReadInt24();
-	MSFL_EXP virtual u24 ReadUInt24();
-	MSFL_EXP virtual i32 ReadInt32();
-	MSFL_EXP virtual u32 ReadUInt32();
-	MSFL_EXP virtual i48 ReadInt48();
-	MSFL_EXP virtual u48 ReadUInt48();
-	MSFL_EXP virtual i64 ReadInt64();
-	MSFL_EXP virtual u64 ReadUInt64();
+	MSFL_EXP virtual byte* readBytes(size_t sz);
+	MSFL_EXP virtual i64 readInt(size_t nBytes);
+	MSFL_EXP virtual u64 readUInt(size_t nBytes);
+	MSFL_EXP virtual byte readByte();
+	MSFL_EXP virtual i16 readInt16();
+	MSFL_EXP virtual u16 readUInt16();
+	MSFL_EXP virtual i24 readInt24();
+	MSFL_EXP virtual u24 readUInt24();
+	MSFL_EXP virtual i32 readInt32();
+	MSFL_EXP virtual u32 readUInt32();
+	MSFL_EXP virtual i48 readInt48();
+	MSFL_EXP virtual u48 readUInt48();
+	MSFL_EXP virtual i64 readInt64();
+	MSFL_EXP virtual u64 readUInt64();
 
 	//helper functions
 	MSFL_EXP virtual void copyTo(byte* buffer, size_t copyStart, size_t copySz);

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "ByteStream.hpp"
+#include "bytestream.hpp"
 #include "filewrite.hpp"
 
 

@@ -1,175 +1,175 @@
 [
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/Date.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Date.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/Date.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Date.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Date.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/Date.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/FilePath.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FilePath.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/FilePath.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FilePath.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FilePath.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/FilePath.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/FileStream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FileStream.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/FileStream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FileStream.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FileStream.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/FileStream.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/aes.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/aes.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/aes.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/aes.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/aes.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/aes.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/asset.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/asset.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/asset.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/asset.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/asset.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/asset.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/balloon.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/balloon.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/balloon.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/balloon.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/balloon.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/balloon.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/binary_dump.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/binary_dump.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/binary_dump.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/binary_dump.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/binary_dump.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/binary_dump.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitmap.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmap.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitmap.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmap.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmap.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/bitmap.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitmapRender.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmapRender.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitmapRender.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmapRender.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmapRender.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/bitmapRender.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitstream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitstream.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bitstream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitstream.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitstream.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/bitstream.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bytestream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bytestream.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/bytestream.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bytestream_OLD.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream_OLD.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/bytestream_OLD.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream_OLD.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream_OLD.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/bytestream_OLD.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/crc.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/crc.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/crc.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/crc.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/crc.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/crc.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/error.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/error.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/error.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/error.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/error.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/error.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/filewrite.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/filewrite.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/filewrite.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/h264.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/h264.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/h264.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/h264.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/h264.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/h264.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/jparse.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jparse.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/jparse.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jparse.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jparse.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/jparse.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/jpeg.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jpeg.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/jpeg.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jpeg.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jpeg.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/jpeg.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/main.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/main.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/main.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/main.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/main.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/main.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mov.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mov.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mov.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mov.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mov.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/mov.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mp3.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp3.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mp3.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp3.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp3.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/mp3.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mp4.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp4.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/mp4.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp4.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp4.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/mp4.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/nal.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/nal.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/nal.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/nal.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/nal.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/nal.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/picture.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/picture.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/picture.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/picture.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/picture.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/picture.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/png.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/png.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/png.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/png.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/png.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/png.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/sha.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/sha.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/sha.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/sha.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/sha.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/sha.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/ttf.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttf.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/ttf.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttf.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttf.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/ttf.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/ttfRender.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttfRender.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/ttfRender.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttfRender.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttfRender.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/ttfRender.cpp.o"
 },
 {
   "directory": "/Users/jamesweigand/Documents/porcupine/Indium/build",
-  "command": "/usr/bin/clang++   -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/xml.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/xml.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree -I/Users/jamesweigand/Documents/porcupine/Indium/pch -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -mmacosx-version-min=14.3 -o CMakeFiles/indium.dir/porcupinetree/xml.cpp.o -c /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/xml.cpp",
   "file": "/Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/xml.cpp",
   "output": "CMakeFiles/indium.dir/porcupinetree/xml.cpp.o"
 }
