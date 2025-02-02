@@ -246,12 +246,23 @@ template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
 
 //fast version of modulo for certain bases
 #define fast_modBase2(val, shift) ((val)-(((val) >> 1) << 1))
-#define fast_mod2(val) modBase2(val, 1)
-#define fast_mod4(val) modBase2(val, 2)
-#define fast_mod8(val) modBase2(val, 3)
-#define fast_mod16(val) modBase2(val, 4)
-#define fast_mod32(val) modBase2(val, 5)
-#define fast_mod64(val) modBase2(val, 6)
+#define fast_mod2(val) fast_modBase2(val, 1)
+#define fast_mod4(val) fast_modBase2(val, 2)
+#define fast_mod8(val) fast_modBase2(val, 3)
+#define fast_mod16(val) fast_modBase2(val, 4)
+#define fast_mod32(val) fast_modBase2(val, 5)
+#define fast_mod64(val) fast_modBase2(val, 6)
+
+static size_t computeMaxMod(u64 val) {
+    u64 p = 1, n = 0;
+    
+    while (!(val & p)) {
+        p <<= 1;
+        n++;
+    }
+    
+    return n;
+}
 
 //faster log functions that are also aligned for certain bases
 #define __log_def(align) {  \
@@ -294,11 +305,11 @@ static void a_memcpy16_fast(void *src, void *dest, const size_t copySz) _a_memcp
 static void a_memcpy32_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u32, 4)
 static void a_memcpy64_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u64, 8)
 
-#define _a_memcpy_template(cpyFn, logFn) {      \
+#define _a_memcpy_template(cpyFn, modFn) {      \
     if (!src || !dest || copySz <= 0)           \
         return;                                 \
                                                 \
-    const size_t toAlign = logFn(copySz);       \
+    const size_t toAlign = modFn(copySz);       \
     size_t t = toAlign;                         \
                                                 \
     if (toAlign > copySz) {                     \
@@ -319,6 +330,42 @@ static void a_memcpy64_fast(void *src, void *dest, const size_t copySz) _a_memcp
     cpyFn((char*)s, d, aCopy);                  \
 }
 
-static void a_memcpy16(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy16_fast, fast_log16)
-static void a_memcpy32(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy32_fast, fast_log32)
-static void a_memcpy64(void *src, void *dest, const size_t copySz) _a_memcpy_template(a_memcpy64_fast, fast_log64)
+static void a_memcpy16(void *dest, void *src, const size_t copySz) _a_memcpy_template(a_memcpy16_fast, fast_mod16)
+static void a_memcpy32(void *dest, void *src, const size_t copySz) _a_memcpy_template(a_memcpy32_fast, fast_mod32)
+static void a_memcpy64(void *dest, void *src, const size_t copySz) _a_memcpy_template(a_memcpy64_fast, fast_mod64)
+
+#ifdef COMPILER_MODE_64_BIT
+static void a_memcpy(void *dest, void *src, const size_t copySz) _a_memcpy_template(a_memcpy64_fast, fast_log64)
+#else
+static void a_memcpy(void *dest, void *src, const size_t copySz) _a_memcpy_template(a_memcpy32_fast, fast_log32)
+#endif
+
+#define a_memcpy_2_base(base) a_memcpy##base
+
+//dynamic memcpy
+//
+//works same as normal aligned memcpy but the optimal alignment is computed
+static void dy_memcpy(void *dest, void *src, const size_t copySz) {
+    const size_t _mod = computeMaxMod(copySz);
+
+    const void (*am_ptr)(void*, void*, const size_t) = (const void(*)(void*, void*, const size_t)) &a_memcpy;
+
+    const void (*_cpy_fns[])(void*, void*, const size_t) = {
+        am_ptr,
+        am_ptr,
+        am_ptr,
+        (const void(*)(void*, void*, const size_t)) &a_memcpy16,
+        (const void(*)(void*, void*, const size_t)) &a_memcpy32,
+#ifdef COMPILE_MODE_64_BIT
+        (const void(*)(void*, void*, const size_t)) &a_memcpy64,
+#endif
+    };
+
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _cpy_fns[_mod](dest, src, copySz);
+#else
+    if (_mod < 5)
+        _cpy_fns[_mod](dest, src, copySz);
+#endif
+}

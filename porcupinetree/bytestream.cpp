@@ -1,6 +1,8 @@
 #include "bytestream.hpp"
 #include "msutil.hpp"
 
+constexpr size_t ALIGN_COMPUTE_THRESH = 0xffff;
+
 void free_block(mem_block* block) {
 	if (!block) return;
 
@@ -103,7 +105,15 @@ void ByteStream::add_new_block(byte* dat, const size_t sz) {
 
 		if (!block) return;
 
+#ifndef BYTESTREAM_ALIGNED_16
 		memcpy(block->dat, dat, blck_sz = block->sz);
+#else
+#ifdef COMPILER_MODE_64_BIT
+		a_memcpy64(block->dat, dat, blck_sz=sz);
+#else
+		a_memcpy32(block->dat, dat, blck_sz = block->sz);
+#endif
+#endif
 
 		this->block_append(block);
 
@@ -150,30 +160,39 @@ void ByteStream::pos_adv() {
 void ByteStream::writeBytes(byte *dat, size_t sz) {
 	if (!dat || sz <= 0)
 		return;
-#ifdef BYTESTREAM_ALIGNED_16
-
-#else
+	this->pos += sz;
 	size_t blockBytesLeft;
-	if (sz < (blockBytesLeft = (this->cur_block->sz - this->blockPos))) {
-		memcpy(this->cur_block->dat + this->blockPos, dat, sz);
-		this->blockPos += sz;
-	} else {
-		size_t p;
-		this->pos += sz;
-		memcpy(this->cur_block->dat + this->blockPos, dat, p=blockBytesLeft);
-		sz -= blockBytesLeft;
+	size_t rCopy = min(sz, (blockBytesLeft = (this->cur_block->sz - this->blockPos)));
+	a_memcpy(this->cur_block->dat, dat, rCopy);
+	sz -= rCopy;
 
+	byte *dp = dat + rCopy;
+
+	//TODO: when writing blocks try computing the alignment for a block and use a
+	//manual version of dy_memcpy to optimally copy over for a block of data
+	//still have an if between dynamic copy and just normal memcpy since for
+	//small byte writes memcpy is likely faster
+
+	/*if (sz > ALIGN_COMPUTE_THRESH) {
 		while (sz > this->blockAllocSz) {
-			this->add_new_block(dat+p, this->blockAllocSz);
-			p += this->blockAllocSz;
+			dy_memcpy(this->cur_block->dat, dp, this->blockAllocSz);
+			sz -= this->blockAllocSz;
+			dp += blockAllocSz;
 		}
-
-		//copy left over bytes
-		this->block_adv();
-		memcpy(this->cur_block->dat, dat+p, sz);
-		this->blockPos = sz;
-	}
+	} else {
+		while (sz > this->blockAllocSz) {
+#ifdef COMPILER_MODE_64_BIT
+			a_memcpy64_fast(this->cur_block->dat, dat, sz);
+#else
+			a_memcpy32_fast(this->cur_block->dat, dat, sz);
 #endif
+			sz -= this->blockAllocSz;
+		}
+	}*/
+
+	//right side
+	this->block_adv();
+	a_memcpy(this->cur_block->dat, dat)
 }
 
 void ByteStream::writeByte(byte b) {
