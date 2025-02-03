@@ -301,9 +301,9 @@ static i32 fast_log64(i32 val) __log_def(6)
     }                                          \
 }
 
-static void a_memcpy16_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u16, 2)
-static void a_memcpy32_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u32, 4)
-static void a_memcpy64_fast(void *src, void *dest, const size_t copySz) _a_memcpy_fast_template(u64, 8)
+static void a_memset16_fast(void *dest, void *src, const size_t copySz) _a_memcpy_fast_template(u16, 2)
+static void a_memset32_fast(void *dest, void *src, const size_t copySz) _a_memcpy_fast_template(u32, 4)
+static void a_memset64_fast(void *dest, void *src, const size_t copySz) _a_memcpy_fast_template(u64, 8)
 
 #define _a_memcpy_template(cpyFn, modFn) {      \
     if (!src || !dest || copySz <= 0)           \
@@ -342,11 +342,11 @@ static void a_memcpy(void *dest, void *src, const size_t copySz) _a_memcpy_templ
 
 #define a_memcpy_2_base(base) a_memcpy##base
 
-static const void (*__am_ptr)(void*, void*, const size_t) = (const void(*)(void*, void*, const size_t)) &a_memcpy;
+static const void (*__amcpy_ptr)(void*, void*, const size_t) = (const void(*)(void*, void*, const size_t)) &a_memcpy;
 static const void (*_cpy_fns[])(void*, void*, const size_t) = {
-    __am_ptr,
-    __am_ptr,
-    __am_ptr,
+    __amcpy_ptr,
+    __amcpy_ptr,
+    __amcpy_ptr,
     (const void(*)(void*, void*, const size_t)) &a_memcpy16,
     (const void(*)(void*, void*, const size_t)) &a_memcpy32,
 #ifdef COMPILE_MODE_64_BIT
@@ -355,9 +355,9 @@ static const void (*_cpy_fns[])(void*, void*, const size_t) = {
 };
 
 static const void (*_fast_cpy_fns[])(void*, void*, const size_t) = {
-    __am_ptr,
-    __am_ptr,
-    __am_ptr,
+    __amcpy_ptr,
+    __amcpy_ptr,
+    __amcpy_ptr,
     (const void(*)(void*, void*, const size_t)) &a_memcpy16_fast,
     (const void(*)(void*, void*, const size_t)) &a_memcpy32_fast,
 #ifdef COMPILE_MODE_64_BIT
@@ -409,5 +409,133 @@ static void dy_memcpy_manual_fast(void *dest, void *src, const size_t copySz, co
 #else
     if (_mod < 5)
         _fast_cpy_fns[_mod](dest, src, copySz);
+#endif
+}
+
+//memset stuff
+//---------------------------------------------
+//asdf
+//asdf
+//asdf
+#define _a_memset_fast_template(type, typeSz) {\
+    const type* s = (const type*) src;         \
+    type *d = (type*) dest;                    \
+                                               \
+    i64 bytesLeft = copySz;                    \
+                                               \
+    if (bytesLeft < 0)                         \
+        return;                                \
+                                               \
+    while (bytesLeft > typeSz) {               \
+        *d++ = *s++;                           \
+        bytesLeft -= typeSz;                   \
+    }                                          \
+}
+
+static void a_memset16_fast(void *dest, char c, const size_t copySz) _a_memset_fast_template(u16, 2)
+static void a_memset32_fast(void *dest, char c, const size_t copySz) _a_memset_fast_template(u32, 4)
+static void a_memset64_fast(void *dest, char c, const size_t copySz) _a_memset_fast_template(u64, 8)
+
+#define _a_memset_template(cpyFn, modFn) {      \
+    if (!src || !dest || copySz <= 0)           \
+        return;                                 \
+                                                \
+    const size_t toAlign = modFn(copySz);       \
+    size_t t = toAlign;                         \
+                                                \
+    if (toAlign > copySz) {                     \
+        memcpy(dest, src, copySz);              \
+        return;                                 \
+    }                                           \
+                                                \
+    /* align */                                 \
+    char *d = (char*) dest;                     \
+    const char* s = (const char*) src;          \
+                                                \
+    while (t--)                                 \
+        *d++ = *s++;                            \
+                                                \
+    size_t aCopy = copySz - toAlign;            \
+                                                \
+    /* bulk copy */                             \
+    cpyFn((char*)s, d, aCopy);                  \
+}
+
+static void a_memset16(void *dest, char c, const size_t copySz) _a_memset_template(a_memset16_fast, fast_mod16)
+static void a_memset32(void *dest, char c, const size_t copySz) _a_memset_template(a_memset32_fast, fast_mod32)
+static void a_memset64(void *dest, char c, const size_t copySz) _a_memset_template(a_memset64_fast, fast_mod64)
+
+#ifdef COMPILER_MODE_64_BIT
+static void a_memset(void *dest, char c, const size_t copySz) _a_memset_template(a_memset64_fast, fast_log64)
+#else
+static void a_memset(void *dest, char c, const size_t copySz) _a_memset_template(a_memset32_fast, fast_log32)
+#endif
+
+#define a_memset_2_base(base) a_memset##base
+
+static const void (*__amset_ptr)(void*, char, const size_t) = (const void(*)(void*, char, const size_t)) &a_memset;
+static const void (*_mset_fns[])(void*, char, const size_t) = {
+    __amset_ptr,
+    __amset_ptr,
+    __amset_ptr,
+    (const void(*)(void*, char, const size_t)) &a_memset16,
+    (const void(*)(void*, char, const size_t)) &a_memset32,
+#ifdef COMPILE_MODE_64_BIT
+    (const void(*)(void*, void*, const size_t)) &a_memset64,
+#endif
+};
+
+static const void (*_fast_mset_fns[])(void*, char, const size_t) = {
+    __amset_ptr,
+    __amset_ptr,
+    __amset_ptr,
+    (const void(*)(void*, char, const size_t)) &a_memset16_fast,
+    (const void(*)(void*, char, const size_t)) &a_memset32_fast,
+#ifdef COMPILE_MODE_64_BIT
+    (const void(*)(void*, char, const size_t)) &a_memset64_fast,
+#endif
+};
+
+static void dy_memset(void *dest, char c, const size_t copySz) {
+    const size_t _mod = computeMaxMod(copySz);
+
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _mset_fns[_mod](dest, c, copySz);
+#else
+    if (_mod < 5)
+        _mset_fns[_mod](dest, c, copySz);
+#endif
+}
+
+static void dy_memset_manual(void *dest, char c, const size_t copySz, const size_t _mod) {
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _mset_fns[_mod](dest, c, copySz);
+#else
+    if (_mod < 5)
+        _mset_fns[_mod](dest, c, copySz);
+#endif
+}
+
+static void dy_memset_fast(void *dest, char c, const size_t copySz) {
+    const size_t _mod = computeMaxMod(copySz);
+
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _fast_mset_fns[_mod](dest, c, copySz);
+#else
+    if (_mod < 5)
+        _fast_mset_fns[_mod](dest, c, copySz);
+#endif
+}
+
+static void dy_memset_manual_fast(void *dest, char c, const size_t copySz, const size_t _mod) {
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _fast_mset_fns[_mod](dest, c, copySz);
+#else
+    if (_mod < 5)
+        _fast_mset_fns[_mod](dest, c, copySz);
 #endif
 }

@@ -1,7 +1,7 @@
 #include "bytestream.hpp"
 #include "msutil.hpp"
 
-constexpr size_t ALIGN_COMPUTE_THRESH = 0xffff;
+constexpr size_t ALIGN_COMPUTE_THRESH = 0xff;
 
 void free_block(mem_block* block) {
 	if (!block) return;
