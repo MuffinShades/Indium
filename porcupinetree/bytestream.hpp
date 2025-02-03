@@ -34,11 +34,19 @@ struct mem_block {
 
 class ByteStream {
 private:
-	mem_block* head_block = nullptr, *cur_block = nullptr;
-	size_t allocSz = 0, len = 0, pos = 0, nBlocks = 0, blockPos = 0;
 	size_t blockAllocSz = 0xffff, 
 		   blockAllocSzLog16 = 4, 
-		   blockAllocSzLog2 = 16;
+		   blockAllocSzLog2 = 16,
+	#ifdef COMPILER_MODE_64_BIT
+		   blockAllocSzAlignment = 5;
+	#else
+		   blockAllocSzAlignment = 4;
+	#endif
+
+	bool sz_aligned = false;
+protected:
+	mem_block* head_block = nullptr, *cur_block = nullptr;
+	size_t allocSz = 0, len = 0, pos = 0, nBlocks = 0, blockPos = 0;
 	byte* cur = nullptr;
 	mem_block* alloc_new_block(size_t blockSz);
 	void block_append(mem_block* block);
@@ -49,6 +57,8 @@ private:
 	void block_end();
 	u32 mod_block_sz(const u64 val);
 public:
+	ByteStream_Mode int_mode = ByteStream_BigEndian;
+
 	MSFL_EXP ByteStream(byte* dat, size_t len);
 	MSFL_EXP ByteStream(size_t allocSz);
 	MSFL_EXP ByteStream();
@@ -56,18 +66,18 @@ public:
 	//write functions
 	MSFL_EXP virtual void writeBytes(byte* dat, size_t sz);
 	MSFL_EXP virtual void writeInt(i64 val, size_t nBytes = 4);
-	MSFL_EXP virtual void writeUInt(i64 val, size_t nBytes = 4);
+	MSFL_EXP virtual void writeUInt(u64 val, size_t nBytes = 4);
 	MSFL_EXP virtual void writeByte(byte b);
-	MSFL_EXP virtual void writeInt16(i16 b);
-	MSFL_EXP virtual void writeUInt16(u16 b);
-	MSFL_EXP virtual void writeInt24(i24 b);
-	MSFL_EXP virtual void writeUInt24(u24 b);
-	MSFL_EXP virtual void writeInt32(i32 b);
-	MSFL_EXP virtual void writeUInt32(u32 b);
-	MSFL_EXP virtual void writeInt48(i48 b);
-	MSFL_EXP virtual void writeUInt48(u48 b);
-	MSFL_EXP virtual void writeInt64(i64 b);
-	MSFL_EXP virtual void writeUInt64(u64 b);
+	MSFL_EXP virtual void writeInt16(i16 val);
+	MSFL_EXP virtual void writeUInt16(u16 val);
+	MSFL_EXP virtual void writeInt24(i24 val);
+	MSFL_EXP virtual void writeUInt24(u24 val);
+	MSFL_EXP virtual void writeInt32(i32 val);
+	MSFL_EXP virtual void writeUInt32(u32 val);
+	MSFL_EXP virtual void writeInt48(i48 val);
+	MSFL_EXP virtual void writeUInt48(u48 val);
+	MSFL_EXP virtual void writeInt64(i64 val);
+	MSFL_EXP virtual void writeUInt64(u64 val);
 	MSFL_EXP virtual void multiWrite(u64 val, size_t valSz, size_t nCopy);
 
 	//read functions
@@ -99,6 +109,7 @@ public:
 	MSFL_EXP void resize(size_t sz);
 	MSFL_EXP void clip();
 	MSFL_EXP void skip(size_t nBytes);
+	MSFL_EXP void setMode(ByteStream_Mode mode);
 
 	//operators
 	MSFL_EXP byte operator[](size_t i);

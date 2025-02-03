@@ -163,7 +163,11 @@ void ByteStream::writeBytes(byte *dat, size_t sz) {
 	this->pos += sz;
 	size_t blockBytesLeft;
 	size_t rCopy = min(sz, (blockBytesLeft = (this->cur_block->sz - this->blockPos)));
-	a_memcpy(this->cur_block->dat, dat, rCopy);
+
+	if (sz > ALIGN_COMPUTE_THRESH)
+		a_memcpy(this->cur_block->dat, dat, rCopy);
+	else
+		memcpy(this->cur_block->dat, dat, rCopy);
 	sz -= rCopy;
 
 	byte *dp = dat + rCopy;
@@ -173,26 +177,23 @@ void ByteStream::writeBytes(byte *dat, size_t sz) {
 	//still have an if between dynamic copy and just normal memcpy since for
 	//small byte writes memcpy is likely faster
 
-	/*if (sz > ALIGN_COMPUTE_THRESH) {
-		while (sz > this->blockAllocSz) {
-			dy_memcpy(this->cur_block->dat, dp, this->blockAllocSz);
-			sz -= this->blockAllocSz;
-			dp += blockAllocSz;
-		}
-	} else {
-		while (sz > this->blockAllocSz) {
-#ifdef COMPILER_MODE_64_BIT
-			a_memcpy64_fast(this->cur_block->dat, dat, sz);
+	while (sz > this->blockAllocSz) {
+#ifdef BYTESTREAM_ALIGNED_16
+		dy_memcpy_manual_fast(this->cur_block->dat, dp, sz, this->blockAllocSzAlignment);
 #else
-			a_memcpy32_fast(this->cur_block->dat, dat, sz);
+		dy_memcpy_manual(this->cur_block->dat, dp, sz, this->blockAllocSzAlignment);
 #endif
-			sz -= this->blockAllocSz;
-		}
-	}*/
+		sz -= this->blockAllocSz;
+		dp += this->blockAllocSz;
+	}
 
-	//right side
-	this->block_adv();
-	a_memcpy(this->cur_block->dat, dat)
+	if (sz > 0) {
+		this->block_adv();
+		if (sz > ALIGN_COMPUTE_THRESH)
+			a_memcpy(this->cur_block->dat, dp, sz);
+		else
+			memcpy(this->cur_block->dat, dp, sz);
+	}
 }
 
 void ByteStream::writeByte(byte b) {
@@ -200,6 +201,89 @@ void ByteStream::writeByte(byte b) {
 	*this->cur = b;
 }
 
+void ByteStream::setMode(ByteStream_Mode mode) {
+	this->int_mode = mode;
+}
+
+void ByteStream::writeInt(i64 val, size_t nBytes = 4) {
+	//clamp
+	if (nBytes <= 0) nBytes = 1;
+	if (nBytes > 8) nBytes = 8;
+
+	if (this->int_mode == ByteStream_LittleEndian)
+		while (nBytes--) {
+			this->writeByte(val & 0xff);
+			val >>= 8;
+		}
+	else
+		while (nBytes--)
+			this->writeByte((val >> (nBytes << 3)) & 0xff);
+}
+
+void ByteStream::writeUInt(u64 val, size_t nBytes = 4) {
+	//clamp
+	if (nBytes <= 0) nBytes = 1;
+	if (nBytes > 8) nBytes = 8;
+
+	if (this->int_mode == ByteStream_LittleEndian)
+		while (nBytes--) {
+			this->writeByte(val & 0xff);
+			val >>= 8;
+		}
+	else
+		while (nBytes--)
+			this->writeByte((val >> (nBytes << 3)) & 0xff);
+}
+
+//int writes
+void ByteStream::writeInt16(i16 val) {
+	this->writeInt(val, sizeof(i16));
+}
+
+void ByteStream::writeUInt16(u16 val) {
+	this->writeUInt(val, sizeof(u16));
+}
+
+void ByteStream::writeInt24(i24 val) {
+	this->writeInt(val, 3);
+}
+
+void ByteStream::writeUInt24(u24 val) {
+	this->writeUInt(val, 3);
+}
+
+void ByteStream::writeInt32(i32 val) {
+	this->writeInt(val, sizeof(i32));
+}
+
+void ByteStream::writeUInt32(u32 val) {
+	this->writeUInt(val, sizeof(u32));
+}
+
+void ByteStream::writeInt48(i48 val) {
+	this->writeInt(val, 5);
+}
+
+void ByteStream::writeUInt48(u48 val) {
+	this->writeUInt(val, 5);
+}
+
+void ByteStream::writeInt64(i64 val) {
+	this->writeInt(val, sizeof(i64));
+}
+
+void ByteStream::writeUInt64(u64 val) {
+	this->writeUInt(val, sizeof(u64));
+}
+
+//TODO: int reads and other reads along with multi write
+
+
+
+
+
+
+//block alloc size stuff
 #ifdef BYTESTREAM_ALIGNED_16
 void ByteStream::setBlockAllocSz(const size_t log16Sz) {
 	const size_t sz = 1 << (log16Sz << 2);
@@ -208,11 +292,14 @@ void ByteStream::setBlockAllocSz(const size_t log16Sz) {
 	//this->blockAllocSzLog2 = log16Sz << 2;
 	this->blockAllocSzLog16 = fast_log16(sz);
 	this->blockAllocSzLog2 = fast_log2(sz);
+	this->blockAllocSzAlignment = computeMaxMod(sz);
+	this->sz_aligned = true;
 }
 #else
 void ByteStream::setBlockAllocSz(const size_t sz) {
 	this->blockAllocSz = min(sz, MAX_BLOCK_SIZE);
 	this->blockAllocSzLog16 = fast_log16(sz);
 	this->blockAllocSzLog2  = fast_log2(sz);
+	this->blockAllocSzAlignment = computeMaxMod(sz);
 }
 #endif

@@ -342,24 +342,34 @@ static void a_memcpy(void *dest, void *src, const size_t copySz) _a_memcpy_templ
 
 #define a_memcpy_2_base(base) a_memcpy##base
 
+static const void (*__am_ptr)(void*, void*, const size_t) = (const void(*)(void*, void*, const size_t)) &a_memcpy;
+static const void (*_cpy_fns[])(void*, void*, const size_t) = {
+    __am_ptr,
+    __am_ptr,
+    __am_ptr,
+    (const void(*)(void*, void*, const size_t)) &a_memcpy16,
+    (const void(*)(void*, void*, const size_t)) &a_memcpy32,
+#ifdef COMPILE_MODE_64_BIT
+    (const void(*)(void*, void*, const size_t)) &a_memcpy64,
+#endif
+};
+
+static const void (*_fast_cpy_fns[])(void*, void*, const size_t) = {
+    __am_ptr,
+    __am_ptr,
+    __am_ptr,
+    (const void(*)(void*, void*, const size_t)) &a_memcpy16_fast,
+    (const void(*)(void*, void*, const size_t)) &a_memcpy32_fast,
+#ifdef COMPILE_MODE_64_BIT
+    (const void(*)(void*, void*, const size_t)) &a_memcpy64_fast,
+#endif
+};
+
 //dynamic memcpy
 //
 //works same as normal aligned memcpy but the optimal alignment is computed
 static void dy_memcpy(void *dest, void *src, const size_t copySz) {
     const size_t _mod = computeMaxMod(copySz);
-
-    const void (*am_ptr)(void*, void*, const size_t) = (const void(*)(void*, void*, const size_t)) &a_memcpy;
-
-    const void (*_cpy_fns[])(void*, void*, const size_t) = {
-        am_ptr,
-        am_ptr,
-        am_ptr,
-        (const void(*)(void*, void*, const size_t)) &a_memcpy16,
-        (const void(*)(void*, void*, const size_t)) &a_memcpy32,
-#ifdef COMPILE_MODE_64_BIT
-        (const void(*)(void*, void*, const size_t)) &a_memcpy64,
-#endif
-    };
 
 #ifdef COMPILE_MODE_64_BIT
     if (_mod < 6)
@@ -367,5 +377,37 @@ static void dy_memcpy(void *dest, void *src, const size_t copySz) {
 #else
     if (_mod < 5)
         _cpy_fns[_mod](dest, src, copySz);
+#endif
+}
+
+static void dy_memcpy_manual(void *dest, void *src, const size_t copySz, const size_t _mod) {
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _cpy_fns[_mod](dest, src, copySz);
+#else
+    if (_mod < 5)
+        _cpy_fns[_mod](dest, src, copySz);
+#endif
+}
+
+static void dy_memcpy_fast(void *dest, void *src, const size_t copySz) {
+    const size_t _mod = computeMaxMod(copySz);
+
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _fast_cpy_fns[_mod](dest, src, copySz);
+#else
+    if (_mod < 5)
+        _fast_cpy_fns[_mod](dest, src, copySz);
+#endif
+}
+
+static void dy_memcpy_manual_fast(void *dest, void *src, const size_t copySz, const size_t _mod) {
+#ifdef COMPILE_MODE_64_BIT
+    if (_mod < 6)
+        _fast_cpy_fns[_mod](dest, src, copySz);
+#else
+    if (_mod < 5)
+        _fast_cpy_fns[_mod](dest, src, copySz);
 #endif
 }

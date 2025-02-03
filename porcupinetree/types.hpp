@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "compile_info.hpp"
 
 //h264 types
 typedef bool flag;
