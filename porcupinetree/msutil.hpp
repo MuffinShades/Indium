@@ -245,13 +245,16 @@ template<class _Ty> static bool _bufCmp(_Ty *buf1, _Ty* buf2, size_t bSz) {
 }
 
 //fast version of modulo for certain bases
-#define fast_modBase2(val, shift) ((val)-(((val) >> 1) << 1))
-#define fast_mod2(val) fast_modBase2(val, 1)
-#define fast_mod4(val) fast_modBase2(val, 2)
-#define fast_mod8(val) fast_modBase2(val, 3)
-#define fast_mod16(val) fast_modBase2(val, 4)
-#define fast_mod32(val) fast_modBase2(val, 5)
-#define fast_mod64(val) fast_modBase2(val, 6)
+#define fast_modBase2(val, shift) ((val) & ((1 << (shift)) - 1))
+#define fast_mod2(val) (val) & 1
+#define fast_mod4(val) (val) & 3
+#define fast_mod8(val) (val) & 7
+#define fast_mod16(val) (val) & 15
+#define fast_mod32(val) (val) & 31
+#define fast_mod64(val) (val) & 63
+#define fast_mod128(val) (val) & 127
+#define fast_mod256(val) (val) & 255
+#define fast_mod512(val) (val) & 511
 
 static size_t computeMaxMod(u64 val) {
     u64 p = 1, n = 0;
@@ -286,7 +289,7 @@ static i32 fast_log64(i32 val) __log_def(6)
 //normal -> will align copySz before copying data
 //fast -> assumes copy size is already aligned, also doesnt do same pointer safety checks (faster but can be more dangerous)
 
-#define _a_memcpy_fast_template(type, typeSz) {\
+/*#define _a_memcpy_fast_template(type, typeSz) {\
     const type* s = (const type*) src;         \
     type *d = (type*) dest;                    \
                                                \
@@ -317,7 +320,6 @@ static void a_memset64_fast(void *dest, void *src, const size_t copySz) _a_memcp
         return;                                 \
     }                                           \
                                                 \
-    /* align */                                 \
     char *d = (char*) dest;                     \
     const char* s = (const char*) src;          \
                                                 \
@@ -326,7 +328,6 @@ static void a_memset64_fast(void *dest, void *src, const size_t copySz) _a_memcp
                                                 \
     size_t aCopy = copySz - toAlign;            \
                                                 \
-    /* bulk copy */                             \
     cpyFn((char*)s, d, aCopy);                  \
 }
 
@@ -448,7 +449,6 @@ static void a_memset64_fast(void *dest, char c, const size_t copySz) _a_memset_f
         return;                                 \
     }                                           \
                                                 \
-    /* align */                                 \
     char *d = (char*) dest;                     \
     const char* s = (const char*) src;          \
                                                 \
@@ -457,7 +457,6 @@ static void a_memset64_fast(void *dest, char c, const size_t copySz) _a_memset_f
                                                 \
     size_t aCopy = copySz - toAlign;            \
                                                 \
-    /* bulk copy */                             \
     cpyFn((char*)s, d, aCopy);                  \
 }
 
@@ -538,4 +537,4 @@ static void dy_memset_manual_fast(void *dest, char c, const size_t copySz, const
     if (_mod < 5)
         _fast_mset_fns[_mod](dest, c, copySz);
 #endif
-}
+}*/

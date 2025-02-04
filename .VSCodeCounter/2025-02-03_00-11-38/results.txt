@@ -1,0 +1,164 @@
+Date : 2025-02-03 00:11:38
+Directory : /Users/jamesweigand/Documents/porcupine/Indium
+Total : 108 files,  13324 codes, 1824 comments, 2633 blanks, all 17781 lines
+
+Languages
++-------------+------------+------------+------------+------------+------------+
+| language    | files      | code       | comment    | blank      | total      |
++-------------+------------+------------+------------+------------+------------+
+| C++         |         68 |      7,868 |      1,627 |      1,998 |     11,493 |
+| JSON        |         12 |      2,490 |          0 |          7 |      2,497 |
+| C           |          1 |        682 |         61 |        153 |        896 |
+| Makefile    |          1 |        591 |        132 |        215 |        938 |
+| Markdown    |         13 |        408 |          0 |         84 |        492 |
+| YAML        |          1 |        384 |          4 |         24 |        412 |
+| CMake       |          9 |        373 |          0 |         75 |        448 |
+| CMake Cache |          1 |        315 |          0 |         76 |        391 |
+| XML         |          1 |        211 |          0 |          0 |        211 |
+| TypeScript  |          1 |          2 |          0 |          1 |          3 |
++-------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                      |        108 |     13,324 |      1,824 |      2,633 |     17,781 |
+| . (Files)                                                                                                              |          2 |         45 |          0 |          9 |         54 |
+| build                                                                                                                  |         23 |      5,485 |        259 |        698 |      6,442 |
+| build (Files)                                                                                                          |          4 |      1,124 |        132 |        299 |      1,555 |
+| build/.cmake                                                                                                           |          8 |      2,311 |          0 |          7 |      2,318 |
+| build/.cmake/api                                                                                                       |          8 |      2,311 |          0 |          7 |      2,318 |
+| build/.cmake/api/v1                                                                                                    |          8 |      2,311 |          0 |          7 |      2,318 |
+| build/.cmake/api/v1/query                                                                                              |          1 |          1 |          0 |          0 |          1 |
+| build/.cmake/api/v1/query/client-vscode                                                                                |          1 |          1 |          0 |          0 |          1 |
+| build/.cmake/api/v1/reply                                                                                              |          7 |      2,310 |          0 |          7 |      2,317 |
+| build/CMakeFiles                                                                                                       |         11 |      2,050 |        127 |        392 |      2,569 |
+| build/CMakeFiles (Files)                                                                                               |          3 |        442 |          4 |         35 |        481 |
+| build/CMakeFiles/3.29.3                                                                                                |          5 |      1,495 |        123 |        347 |      1,965 |
+| build/CMakeFiles/3.29.3 (Files)                                                                                        |          3 |        146 |          0 |         44 |        190 |
+| build/CMakeFiles/3.29.3/CompilerIdC                                                                                    |          1 |        682 |         61 |        153 |        896 |
+| build/CMakeFiles/3.29.3/CompilerIdCXX                                                                                  |          1 |        667 |         62 |        150 |        879 |
+| build/CMakeFiles/indium.dir                                                                                            |          3 |        113 |          0 |         10 |        123 |
+| pch                                                                                                                    |          1 |          0 |          1 |          0 |          1 |
+| porcupinetree                                                                                                          |         82 |      7,794 |      1,564 |      1,926 |     11,284 |
+| porcupinetree (Files)                                                                                                  |         67 |      7,412 |      1,564 |      1,848 |     10,824 |
+| porcupinetree/.VSCodeCounter                                                                                           |         15 |        382 |          0 |         78 |        460 |
+| porcupinetree/.VSCodeCounter/2025-01-15_21-16-53                                                                       |          5 |         97 |          0 |         26 |        123 |
+| porcupinetree/.VSCodeCounter/2025-01-15_21-20-56                                                                       |          5 |        117 |          0 |         26 |        143 |
+| porcupinetree/.VSCodeCounter/2025-01-22_19-44-08                                                                       |          5 |        168 |          0 |         26 |        194 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| filename                                                                                                               | language    | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| /Users/jamesweigand/Documents/porcupine/Indium/CMakeLists.txt                                                          | CMake       |         16 |          0 |          3 |         19 |
+| /Users/jamesweigand/Documents/porcupine/Indium/README.md                                                               | Markdown    |         29 |          0 |          6 |         35 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/query/client-vscode/query.json                      | JSON        |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/cache-v2-9e5486bd5e4b1c93d1d8.json            | JSON        |      1,275 |          0 |          1 |      1,276 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/cmakeFiles-v1-be74129305af44bf31da.json       | JSON        |        161 |          0 |          1 |        162 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/codemodel-v2-0254065e7b9367e49543.json        | JSON        |         60 |          0 |          1 |         61 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json   | JSON        |         14 |          0 |          1 |         15 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/index-2025-02-01T22-58-39-0523.json           | JSON        |        132 |          0 |          1 |        133 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/target-indium-Debug-6dad5786da6bc3b4dd22.json | JSON        |        575 |          0 |          1 |        576 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/.cmake/api/v1/reply/toolchains-v1-4bc8c2fbc5d26075b06b.json       | JSON        |         93 |          0 |          1 |         94 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeCache.txt                                                    | CMake Cache |        315 |          0 |         76 |        391 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/3.29.3/CMakeCCompiler.cmake                            | CMake       |         63 |          0 |         18 |         81 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/3.29.3/CMakeCXXCompiler.cmake                          | CMake       |         73 |          0 |         20 |         93 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/3.29.3/CMakeSystem.cmake                               | CMake       |         10 |          0 |          6 |         16 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/3.29.3/CompilerIdC/CMakeCCompilerId.c                  | C           |        682 |         61 |        153 |        896 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/3.29.3/CompilerIdCXX/CMakeCXXCompilerId.cpp            | C++         |        667 |         62 |        150 |        879 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/CMakeConfigureLog.yaml                                 | YAML        |        384 |          4 |         24 |        412 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/CMakeDirectoryInformation.cmake                        | CMake       |         12 |          0 |          5 |         17 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/Makefile.cmake                                         | CMake       |         46 |          0 |          6 |         52 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/indium.dir/DependInfo.cmake                            | CMake       |         45 |          0 |          7 |         52 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/indium.dir/cmake_clean.cmake                           | CMake       |         66 |          0 |          2 |         68 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/CMakeFiles/indium.dir/compiler_depend.ts                          | TypeScript  |          2 |          0 |          1 |          3 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/Makefile                                                          | Makefile    |        591 |        132 |        215 |        938 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/cmake_install.cmake                                               | CMake       |         42 |          0 |          8 |         50 |
+| /Users/jamesweigand/Documents/porcupine/Indium/build/compile_commands.json                                             | JSON        |        176 |          0 |          0 |        176 |
+| /Users/jamesweigand/Documents/porcupine/Indium/pch/pch.h                                                               | C++         |          0 |          1 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-16-53/details.md             | Markdown    |         55 |          0 |          6 |         61 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-16-53/diff-details.md        | Markdown    |          9 |          0 |          6 |         15 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-16-53/diff.md                | Markdown    |         12 |          0 |          7 |         19 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-16-53/results.json           | JSON        |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-16-53/results.md             | Markdown    |         20 |          0 |          7 |         27 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-20-56/details.md             | Markdown    |         64 |          0 |          6 |         70 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-20-56/diff-details.md        | Markdown    |         18 |          0 |          6 |         24 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-20-56/diff.md                | Markdown    |         14 |          0 |          7 |         21 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-20-56/results.json           | JSON        |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-15_21-20-56/results.md             | Markdown    |         20 |          0 |          7 |         27 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-22_19-44-08/details.md             | Markdown    |         70 |          0 |          6 |         76 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-22_19-44-08/diff-details.md        | Markdown    |         57 |          0 |          6 |         63 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-22_19-44-08/diff.md                | Markdown    |         20 |          0 |          7 |         27 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-22_19-44-08/results.json           | JSON        |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/.VSCodeCounter/2025-01-22_19-44-08/results.md             | Markdown    |         20 |          0 |          7 |         27 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Context.hpp                                               | C++         |          6 |          7 |          2 |         15 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Date.cpp                                                  | C++         |        140 |         36 |         26 |        202 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/Date.hpp                                                  | C++         |         37 |          0 |          4 |         41 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FilePath.cpp                                              | C++         |         51 |          5 |         25 |         81 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FilePath.hpp                                              | C++         |         41 |          5 |          9 |         55 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FileStream.cpp                                            | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/FileStream.hpp                                            | C++         |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ID3.hpp                                                   | C++         |         38 |         13 |         14 |         65 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/aes.cpp                                                   | C++         |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/aes.hpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/asset.cpp                                                 | C++         |        790 |        205 |        245 |      1,240 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/asset.hpp                                                 | C++         |        131 |         15 |         13 |        159 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/balloon.cpp                                               | C++         |      1,393 |        583 |        435 |      2,411 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/balloon.hpp                                               | C++         |         78 |         41 |          8 |        127 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/binary_dump.cpp                                           | C++         |          9 |          0 |          4 |         13 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/binary_dump.hpp                                           | C++         |         10 |          0 |          2 |         12 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmap.cpp                                                | C++         |         70 |          2 |         26 |         98 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmap.hpp                                                | C++         |         45 |          0 |          7 |         52 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmapRender.cpp                                          | C++         |         53 |          2 |         13 |         68 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitmapRender.hpp                                          | C++         |         34 |          9 |          6 |         49 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitstream.cpp                                             | C++         |        186 |         46 |         60 |        292 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bitstream.hpp                                             | C++         |         68 |          4 |         21 |         93 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.cpp                                            | C++         |        223 |         18 |         64 |        305 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.hpp                                            | C++         |        109 |          5 |         15 |        129 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream_OLD.cpp                                        | C++         |        233 |          5 |         57 |        295 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream_OLD.hpp                                        | C++         |         88 |          3 |         12 |        103 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/crc.cpp                                                   | C++         |         10 |          0 |          4 |         14 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/crc.hpp                                                   | C++         |         57 |          0 |          2 |         59 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/error.cpp                                                 | C++         |          2 |          0 |          1 |          3 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/error.hpp                                                 | C++         |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.cpp                                             | C++         |         27 |          7 |         14 |         48 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.hpp                                             | C++         |         32 |          0 |          5 |         37 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/h264.cpp                                                  | C++         |          2 |          0 |          2 |          4 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/h264.hpp                                                  | C++         |          8 |          0 |          3 |         11 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jparse.cpp                                                | C++         |        466 |         75 |         87 |        628 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jparse.hpp                                                | C++         |         71 |          4 |         12 |         87 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jpeg.cpp                                                  | C++         |          0 |          0 |          1 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/jpg.hpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/linked_map.hpp                                            | C++         |         84 |         49 |         18 |        151 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/main.cpp                                                  | C++         |         13 |         13 |         12 |         38 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/measure.hpp                                               | C++         |         20 |          0 |          2 |         22 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/memcpy.hpp                                                | C++         |          2 |          0 |          2 |          4 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/micro_vector.h                                            | C++         |         55 |         16 |         12 |         83 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mov.cpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mov.hpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp3.cpp                                                   | C++         |        143 |         16 |         55 |        214 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp3.hpp                                                   | C++         |         56 |          0 |          9 |         65 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp4.cpp                                                   | C++         |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/mp4.hpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/msutil.hpp                                                | C++         |        426 |         33 |         82 |        541 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/nal.cpp                                                   | C++         |         36 |          5 |          8 |         49 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/nal.hpp                                                   | C++         |         13 |          7 |          2 |         22 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/picture.cpp                                               | C++         |          0 |          0 |          1 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/picture.hpp                                               | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/png.cpp                                                   | C++         |        402 |         55 |         89 |        546 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/png.hpp                                                   | C++         |         28 |          0 |          3 |         31 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/porcupinetree.vcxproj                                     | XML         |        211 |          0 |          0 |        211 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/realigned_buffer.hpp                                      | C++         |         31 |         16 |          9 |         56 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/sha.cpp                                                   | C++         |          1 |          0 |          0 |          1 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/sha.hpp                                                   | C++         |          1 |          0 |          1 |          2 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttf.cpp                                                   | C++         |        290 |        107 |         88 |        485 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttf.hpp                                                   | C++         |        113 |         10 |         15 |        138 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttfRender.cpp                                             | C++         |        235 |         66 |         70 |        371 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ttfRender.hpp                                             | C++         |         26 |          0 |          4 |         30 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/types.hpp                                                 | C++         |         23 |          4 |         10 |         37 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/xml.cpp                                                   | C++         |        585 |         69 |        134 |        788 |
+| /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/xml.hpp                                                   | C++         |         99 |          8 |         16 |        123 |
+| Total                                                                                                                  |             |     13,324 |      1,824 |      2,633 |     17,781 |
++------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
