@@ -76,6 +76,9 @@
     <Filter Include="Header Files\memory">
       <UniqueIdentifier>{e586f03c-2d0d-4afa-b36a-1b062286ca9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\memory">
+      <UniqueIdentifier>{44684c17-21ea-497c-8c9a-abc589a98557}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="types.hpp">
@@ -177,11 +180,11 @@
     <ClInclude Include="ByteStream.hpp">
       <Filter>Header Files\stream</Filter>
     </ClInclude>
-    <ClInclude Include="memcpy.hpp">
-      <Filter>Header Files\memory</Filter>
-    </ClInclude>
     <ClInclude Include="Context.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memcpy.hpp">
+      <Filter>Header Files\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="ByteStream.cpp">
       <Filter>Source Files\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="memcpy.cpp">
+      <Filter>Source Files\memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

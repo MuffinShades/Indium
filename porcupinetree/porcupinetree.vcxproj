@@ -191,6 +191,7 @@
     <ClCompile Include="jparse.cpp" />
     <ClCompile Include="jpeg.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="memcpy.cpp" />
     <ClCompile Include="mov.cpp" />
     <ClCompile Include="mp3.cpp" />
     <ClCompile Include="mp4.cpp" />
