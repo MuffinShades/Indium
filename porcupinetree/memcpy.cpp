@@ -262,17 +262,132 @@ static void* in_minicpy256(void* dest, const void* src, size_t len) {
 	case 128: avx_copy_128u(dc - 128, sc - 128); break;
 	case 129: avx_copy_128u(dc - 129, sc - 129);
 	case 1:   *dc = *sc; break;
-	__mini_cpy_group(130, avx_copy_128u, simple_copy_2); break;
-	__mini_cpy_group(131, avx_copy_128u, simple_copy_2); simple_copy_1(dc - 1, sc - 1); break;
-	__mini_cpy_group(132, avx_copy_128u, simple_copy_4); break;
-	__mini_cpy_group(133, avx_copy_128u, simple_copy_4); simple_copy_1(dc - 1, sc - 1); break;
-	__mini_cpy_group(134, avx_copy_128u, simple_copy_4); simple_copy_2(dc - 2, sc - 2); break;
-	__mini_cpy_group(135, avx_copy_128u, simple_copy_4); break;
-	__mini_cpy_group(136, avx_copy_128u, simple_copy_8); break;
-	__mini_cpy_group(137, avx_copy_128u, simple_copy_8); break;
-	__mini_cpy_group(138, avx_copy_128u, simple_copy_8); break;
-	__mini_cpy_group(139, avx_copy_128u, simple_copy_8); break;
-	__mini_cpy_group(140, avx_copy_128u, simple_copy_8); break;
+	__mini_cpy_group(130, avx_copy_128u, simple_copy_2); break; //2
+	__mini_cpy_group(131, avx_copy_128u, simple_copy_2); simple_copy_2(dc - 2, sc - 2); break; //3
+	__mini_cpy_group(132, avx_copy_128u, simple_copy_4); break; //4
+	__mini_cpy_group(133, avx_copy_128u, simple_copy_4); simple_copy_1(dc - 1, sc - 1); break; //5
+	__mini_cpy_group(134, avx_copy_128u, simple_copy_4); simple_copy_2(dc - 2, sc - 2); break; //6
+	__mini_cpy_group(135, avx_copy_128u, simple_copy_4); simple_copy_4(dc - 4, sc - 4); break; //7
+	__mini_cpy_group(136, avx_copy_128u, simple_copy_8); break; //8
+	__mini_cpy_group(137, avx_copy_128u, simple_copy_8); simple_copy_1(dc - 1, sc - 1); break; //9
+	__mini_cpy_group(138, avx_copy_128u, simple_copy_8); simple_copy_2(dc - 2, sc - 2); break; //10
+	__mini_cpy_group(139, avx_copy_128u, simple_copy_8); simple_copy_4(dc - 4, sc - 4); break; //11
+	__mini_cpy_group(140, avx_copy_128u, simple_copy_8); simple_copy_4(dc - 4, sc - 4); break; //12
+	__mini_cpy_group(141, avx_copy_128u, avx_copy_16);   break; //13 uhh i think you need to shift the 16s down since 13-16 need to be 8-8
+	__mini_cpy_group(142, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(143, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(144, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(145, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(146, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(147, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(148, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(149, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(150, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(151, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(152, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(153, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(154, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(155, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(156, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(157, avx_copy_128u, avx_copy_16);
+	__mini_cpy_group(158, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(159, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(160, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(161, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(162, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(163, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(164, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(165, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(166, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(167, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(168, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(169, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(170, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(140, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(171, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(172, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(173, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(174, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(175, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(176, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(177, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(178, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(179, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(180, avx_copy_128u, avx_copy_32);
+	__mini_cpy_group(181, avx_copy_128u, avx_copy_32); //55 32
+	__mini_cpy_group(182, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(183, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(184, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(185, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(186, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(187, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(189, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(190, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(191, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(192, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(193, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(194, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(195, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(196, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(197, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(198, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(199, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(200, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(201, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(202, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(203, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(204, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(205, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(206, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(207, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(208, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(209, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(210, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(211, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(212, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(213, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(214, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(215, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(216, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(217, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(218, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(219, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(220, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(221, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(222, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(223, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(224, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(225, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(226, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(227, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(228, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(229, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(230, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(231, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(232, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(233, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(234, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(235, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(236, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(237, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(238, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(239, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(240, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(241, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(242, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(243, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(244, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(245, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(246, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(247, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(248, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(249, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(250, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(251, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(252, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(253, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(254, avx_copy_128u, simple_copy_8);
+	__mini_cpy_group(255, avx_copy_128u, simple_copy_8);
 	case 256: avx_copy_256u(dest, src); break;
 	default:
 		return in_memcpy(dest, src, len);
