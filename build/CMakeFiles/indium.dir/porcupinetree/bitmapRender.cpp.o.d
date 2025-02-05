@@ -826,8 +826,9 @@ CMakeFiles/indium.dir/porcupinetree/bitmapRender.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__locale_dir/locale_base_api/bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/cstdarg \
-  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/ByteStream.hpp \
+  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/bytestream.hpp \
   /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/types.hpp \
+  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/compile_info.hpp \
   /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/filewrite.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/fstream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/filesystem \

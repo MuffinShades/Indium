@@ -205,7 +205,7 @@ void ByteStream::setMode(ByteStream_Mode mode) {
 	this->int_mode = mode;
 }
 
-void ByteStream::writeInt(i64 val, size_t nBytes = 4) {
+void ByteStream::writeInt(i64 val, size_t nBytes) {
 	//clamp
 	if (nBytes <= 0) nBytes = 1;
 	if (nBytes > 8) nBytes = 8;
@@ -220,7 +220,7 @@ void ByteStream::writeInt(i64 val, size_t nBytes = 4) {
 			this->writeByte((val >> (nBytes << 3)) & 0xff);
 }
 
-void ByteStream::writeUInt(u64 val, size_t nBytes = 4) {
+void ByteStream::writeUInt(u64 val, size_t nBytes) {
 	//clamp
 	if (nBytes <= 0) nBytes = 1;
 	if (nBytes > 8) nBytes = 8;

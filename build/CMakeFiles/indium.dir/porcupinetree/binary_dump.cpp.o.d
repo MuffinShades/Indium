@@ -873,4 +873,5 @@ CMakeFiles/indium.dir/porcupinetree/binary_dump.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/array \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/types.hpp
+  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/types.hpp \
+  /Users/jamesweigand/Documents/porcupine/Indium/porcupinetree/compile_info.hpp
