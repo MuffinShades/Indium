@@ -20,11 +20,11 @@
 #if (defined(_WIN32) || defined(WIN32) || defined(__unix) || defined(__APPLE__))
 
 //16 byte copy functions
-#define loadu_128(src, i) __m128i __m##i = _mm128_loadu_si128(((const __m128i*) src) + i)
-#define storeu_128(dest, i) _mm128_storeu_si128(((__m128i*)dest) + i, __m##i)
+#define loadu_128(src, i) __m128i __m##i = _mm_loadu_si128(((const __m128i*) src) + i)
+#define storeu_128(dest, i) _mm_storeu_si128(((__m128i*)dest) + i, __m##i)
 
-#define load_128(src, i) __m128i __m##i = _mm128_load_si128(((const __m128i*) src) + i)
-#define store_128(dest, i) _mm128_store_si128(((__m128i*)dest) + i, __m##i)
+#define load_128(src, i) __m128i __m##i = _mm_load_si128(((const __m128i*) src) + i)
+#define store_128(dest, i) _mm_store_si128(((__m128i*)dest) + i, __m##i)
 
 //32 byte copy functins
 #define loadu_256(src, i) __m256i __m##i = _mm256_loadu_si256(((const __m256i*) src) + i)
